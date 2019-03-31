@@ -45,11 +45,21 @@ header nav ul li {
   padding-top: 0.3rem;
   color: #fff;
   border-top: solid 0.3rem transparent;
+  font-family: "Proxima Nova", sans-serif;
+  font-weight: normal;
+  font-size: 1.25rem;
+  font-weight: 300;
+  text-transform: capitalize;
+}
+header nav ul li a {
+  text-decoration: none;
+  color: inherit;
 }
 header nav ul .active {
   border-top: solid 0.3rem #54d154;
+  font-weight: bold;
 }
-header nav a {
+header nav .logo {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -75,13 +85,14 @@ header nav .search input[type=text], header nav .search button[type=submit] {
 header nav .search input[type=text] {
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Proxima Nova", sans-serif;
   font-size: 1rem;
   padding-left: 1rem;
   width: 10rem;
 }
 header nav .search input[type=text]::placeholder {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Proxima Nova", sans-serif;
+  font-weight: 300;
   font-size: 1rem;
 }
 header nav .search button[type=submit] {
@@ -95,11 +106,13 @@ header nav .search img {
 }
 
 main {
+  width: 100%;
   background: url("../img/background.jpg") no-repeat;
+  object-fit: cover;
   background-size: cover;
   position: relative;
   text-align: center;
-  padding: 19rem 0 9.85rem 0;
+  padding: 19rem 0 10rem 0;
   z-index: 0;
 }
 main h1 {
@@ -118,6 +131,7 @@ main .mybtn {
   background-color: #54d154;
   color: #fff;
   font-size: 1.5rem;
+  font-family: "Proxima Nova", sans-serif;
 }
 main .mybtn:hover {
   background-color: #4cbd4c;
@@ -133,10 +147,159 @@ main .scroll-down {
   border: transparent;
   background-color: #ffffffcc;
   text-transform: lowercase;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  font-family: "Proxima Nova", sans-serif;
+  font-weight: 300;
 }
 main .scroll-down i {
   margin-left: 0.4rem;
+}
+
+.footer-1 {
+  background-color: #333;
+  box-shadow: inset 0 0 0.5rem #111;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.footer-1 .sect {
+  width: 28rem;
+  padding: 2rem;
+}
+.footer-1 .sect h2 {
+  color: #fff;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 1.15rem;
+  letter-spacing: 0.2rem;
+}
+.footer-1 .sect h2::after {
+  content: "";
+  width: 2.5rem;
+  height: 0.1rem;
+  background-color: #fff;
+  position: absolute;
+  left: 50%;
+  top: 125%;
+  transform: translate(-50%, -50%);
+}
+.footer-1 .sect .footer-section .contenido {
+  margin-top: 1rem;
+  text-align: center;
+  color: #bbb;
+  font-family: "Proxima Nova", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.25;
+}
+.footer-1 .sect .footer-section .contact-section {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.footer-1 .sect .footer-section .contact-section p {
+  text-align: center;
+  color: #aaa;
+}
+.footer-1 .sect .footer-section .contact-section .contact-form {
+  margin-top: 1rem;
+}
+.footer-1 .sect .footer-section .contact-section .contact-form input[type=text], .footer-1 .sect .footer-section .contact-section .contact-form input[type=email], .footer-1 .sect .footer-section .contact-section .contact-form textarea, .footer-1 .sect .footer-section .contact-section .contact-form button[type=submit] {
+  width: 100%;
+  border: none;
+}
+.footer-1 .sect .footer-section .contact-section .contact-form input[type=text], .footer-1 .sect .footer-section .contact-section .contact-form input[type=email], .footer-1 .sect .footer-section .contact-section .contact-form textarea {
+  margin-bottom: 0.2rem;
+  background-color: #444;
+  padding-left: 1rem;
+  font-family: "Proxima Nova", sans-serif;
+  font-size: 1rem;
+  color: #aaa;
+  text-transform: capitalize;
+}
+.footer-1 .sect .footer-section .contact-section .contact-form input[type=text]::placeholder, .footer-1 .sect .footer-section .contact-section .contact-form input[type=email]::placeholder, .footer-1 .sect .footer-section .contact-section .contact-form textarea::placeholder {
+  font-family: "Proxima Nova", sans-serif;
+  font-size: 1rem;
+}
+.footer-1 .sect .footer-section .contact-section .contact-form input[type=text], .footer-1 .sect .footer-section .contact-section .contact-form input[type=email], .footer-1 .sect .footer-section .contact-section .contact-form button[type=submit] {
+  height: 2rem;
+}
+.footer-1 .sect .footer-section .contact-section .contact-form input[type=text] {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+.footer-1 .sect .footer-section .contact-section .contact-form button[type=submit] {
+  margin-top: -0.2rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  background-color: #2b9b2b;
+  color: #bbb;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.footer-1 .sect .footer-section .contact-section .contact-form button[type=submit]:hover {
+  background-color: #2a8b2a;
+}
+.footer-1 .sect .footer-section .contact-section .contact-form textarea {
+  padding-top: 0.5rem;
+  resize: none;
+}
+.footer-1 .sect .footer-section .posts {
+  list-style: none;
+  position: relative;
+}
+.footer-1 .sect .footer-section .posts li {
+  text-align: justify;
+  display: inline-block;
+  margin-top: 1rem;
+}
+.footer-1 .sect .footer-section .posts li img {
+  float: left;
+}
+.footer-1 .sect .footer-section .posts li p {
+  margin-left: 4rem;
+  text-transform: capitalize;
+}
+.footer-1 .sect .footer-section .posts li span {
+  margin-left: 0.6rem;
+  padding: 0.4rem;
+  background-color: #aaa;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  border-radius: 0.2rem;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+}
+.footer-1 .sect .footer-section .posts li span.bg-naranja {
+  background-color: #f34d04;
+}
+.footer-1 .sect .footer-section .posts li span.bg-amarillo {
+  background-color: #ffba00;
+}
+.footer-1 .sect .footer-section .posts li span.bg-azul {
+  background-color: #089dea;
+}
+.footer-1 .sect .footer-section .posts li span.bg-verde {
+  background-color: #54d154;
+}
+.footer-1 .sect .footer-section .social-media {
+  display: flex;
+  background-color: #fff;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 9.5rem 0 9.5rem;
+  padding: 0.25rem 0;
+  border-radius: 5rem;
+}
+.footer-1 .sect .footer-section .social-media li {
+  margin: 0 0.1rem;
+}
+.footer-1 .sect .footer-section .social-media li a {
+  text-decoration: none;
 }
 
 /*# sourceMappingURL=style.css.map */
