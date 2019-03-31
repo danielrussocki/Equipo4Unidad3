@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700');
+@import url('../css/fonts.css');
+*{margin:0;padding:0;box-sizing:border-box;}
+*:focus{outline: none;}
+body{
+  font-family: 'Montserrat', sans-serif;
+}
+header{
+  position: fixed;
+  width: 100%;
+  padding: 0 1.5rem;
+  z-index: 1;
+  &::before{
+    content: "";
+    position: fixed;
+    top:-1rem;
+    left: 0;
+    width: 100%;
+    height: 1rem;
+    box-shadow: 0 0 4rem #000;
+  }
+  nav{
+    width: 100%;
+    height: 3rem;
+    position: relative;
+    ul{
+      position: absolute;
+      list-style: none;
+      display: flex;
+      li{
+        cursor:pointer;
+        margin-right:1rem;
+        padding-top:.3rem;
+        color: #fff;
+        border-top:solid .3rem transparent;
+      }
+      .active{
+        border-top:solid .3rem #54d154;
+      }
+    }
+    a{
+      position: absolute;
+      left:50%;
+      top:50%;
+      transform: translate(-50%,-50%);
+      text-decoration: none;
+      color: inherit;
+      font-family: 'Nautilus Pompilius', sans-serif;
+      font-size: 2rem;
+      color: #fff;
+    }
+    .search{
+      position:absolute;
+      right:0;
+      top:50%;
+      transform: translateY(-50%);
+      display:flex;
+      input[type="text"],button[type="submit"]{
+        border:solid .1rem transparent;
+        height:2rem;
+        background-color:#ffffffdd;
+      }
+      input[type="text"]{
+        border-top-left-radius:1rem;
+        border-bottom-left-radius:1rem;
+        font-family: 'Montserrat', sans-serif;
+        font-size:1rem;
+        padding-left:1rem;
+        width:10rem;
+      }
+      input[type="text"]::placeholder{
+        font-family: 'Montserrat', sans-serif;
+        font-size:1rem;
+      }
+      button[type="submit"]{
+        border-top-right-radius:1rem;
+        border-bottom-right-radius:1rem;
+      }
+      img{
+        padding-right: .5rem;
+        padding-left: .5rem;
+        cursor: pointer;
+      }
+    }
+  }
+}
+main{
+  background: url('../img/background.jpg')no-repeat;
+  background-size: cover;
+  position: relative;
+  text-align: center;
+  padding: 19rem 0 9.85rem 0;
+  z-index: 0;
+  h1{
+    font-size: 4rem;
+    color: #fff;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  .mybtn{
+    margin-top: 2rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    padding: .8rem 2rem;
+    border-radius: 3rem;
+    border:none;
+    background-color: #54d154;
+    color: #fff;
+    font-size: 1.5rem;
+    &:hover{
+      background-color: #4cbd4c;
+    }
+  }
+  .scroll-down{
+    cursor: pointer;
+    position: absolute;
+    top:95%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: .2rem 1rem;
+    border-radius: 3rem;
+    border: transparent;
+    background-color: #ffffffcc;
+    text-transform: lowercase;
+    font-size: 1rem;
+    i{
+      margin-left: .4rem;
+    }
+  }
+}
+// .main{
+  // background: url('../img/background.jpg')no-repeat;
+  // background-size: cover;
+//   &::before{
+    // content: "";
+    // position: fixed;
+    // top:-1rem;
+    // left: 0;
+    // width: 100%;
+    // height: 1rem;
+    // box-shadow: 0 0 2rem #111;
+//   }
+// }
+//   .text{
+//     text-align: center;
+    // padding: 16rem 0 13.2rem 0;
+//     // 29.2
+//     position: relative;
+//     h1{
+      // font-size: 3rem;
+      // color: #fff;
+      // font-weight: bold;
+      // text-transform: capitalize;
+//     }
+//     .mybtn{
+      // cursor: pointer;
+      // text-transform: uppercase;
+      // padding: .8rem 2rem;
+      // border-radius: 3rem;
+      // border:none;
+      // background-color: #54d154;
+      // color: #fff;
+      // font-size: 1rem;
+      // &:hover{
+      //   background-color: #4cbd4c;
+      // }
+//     }
+//     .scroll-down{
+      // cursor: pointer;
+      // position: absolute;
+      // top:95%;
+      // left: 50%;
+      // transform: translate(-50%,-50%);
+      // padding: .2rem 1rem;
+      // border-radius: 3rem;
+      // border: transparent;
+      // background-color: #ffffffcc;
+      // text-transform: lowercase;
+      // font-size: 1rem;
+      // i{
+      //   margin-left: .4rem;
+      // }
+//     }
+//   }
+// }
