@@ -217,7 +217,6 @@ main .scroll-down i {
   font-family: "Proxima Nova", sans-serif;
   font-size: 1rem;
   color: #aaa;
-  text-transform: capitalize;
 }
 .footer-1 .sect .footer-section .contact-section .contact-form input[type=text]::placeholder, .footer-1 .sect .footer-section .contact-section .contact-form input[type=email]::placeholder, .footer-1 .sect .footer-section .contact-section .contact-form textarea::placeholder {
   font-family: "Proxima Nova", sans-serif;
