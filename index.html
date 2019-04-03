@@ -5,12 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Template</title>
+  <title>Switch</title>
+  <link rel="stylesheet" href="css/jquery-multitabs.css">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300">
-  <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
-
+  <link rel="stylesheet" href="css/lightslider.css">
 </head>
 
 <body>
@@ -22,36 +22,55 @@
       <h2 class="section-title">Our latest work</h2>
       <hr class="line">
       <p class="section-description">Lorem ipsum dolor sit amet. Proin gravida nibh vel velit auctor aliquet.</p>
-      <div id="tabs" class="photo-works-buttons">
-        <ul>
-          <li data-index="0"><a href="#tabs-1">Photograpy</a></li>
-          <li data-index="1"><a href="#tabs-2">Desing</a></li>
-          <li data-index="2"><a href="#tabs-3">Print</a></li>
-        </ul>
-      </div>
-      <div id="tabs-1" class="our-latest-works-images">
-        <img src="images/works/work-1.png" alt="Trees">
-        <img src="images/works/work-2.png" alt="Computer">
-        <img src="images/works/work-3.png" alt="Cake">
-        <img src="images/works/work-4.png" alt="Cat">
-        <img src="images/works/work-5.png" alt="Code">
-        <img src="images/works/work-6.png" alt="Work">
-        <img src="images/works/work-7.png" alt="Yummy">
-        <img src="images/works/work-8.png" alt="Grey">
-        <img src="images/works/work-9.png" alt="Bedronka">
-        <img src="images/works/work-10.png" alt="Green">
+      <div class="tab2">
+        <div data-child="false" class="tab__header">
+          <div class="tab__header-1 tab__header--active">Photography</div>
+          <div class="tab__header-2">Design</div>
+          <div class="tab__header-3">Print</div>
+        </div>
 
-      </div>
-      <div id="tabs-2">
-
-
-      </div>
-      <div id="tabs-3">
-
+        <div class=" tab__content">
+          <div class="tab__content-1 tab__content--active">
+            <img src="img/works/work-1.png" alt="Trees">
+            <img src="img/works/work-2.png" alt="Computer">
+            <img src="img/works/work-3.png" alt="Cake">
+            <img src="img/works/work-4.png" alt="Cat">
+            <img src="img/works/work-5.png" alt="Code">
+            <img src="img/works/work-6.png" alt="Work">
+            <img src="img/works/work-7.png" alt="Yummy">
+            <img src="img/works/work-8.png" alt="Grey">
+            <img src="img/works/work-9.png" alt="Bedronka">
+            <img src="img/works/work-10.png" alt="Green">
+          </div>
+          <div class="tab__content-2 ">
+            <img src="img/works/work-1.png" alt="Trees">
+            <img src="img/works/work-2.png" alt="Computer">
+            <img src="img/works/work-3.png" alt="Cake">
+            <img src="img/works/work-4.png" alt="Cat">
+            <img src="img/works/work-6.png" alt="Work">
+            <img src="img/works/work-7.png" alt="Yummy">
+            <img src="img/works/work-8.png" alt="Grey">
+            <img src="img/works/work-9.png" alt="Bedronka">
+            <img src="img/works/work-10.png" alt="Green">
+          </div>
+          <div class="tab__content-3">
+            <img src="img/works/work-1.png" alt="Trees">
+            <img src="img/works/work-2.png" alt="Computer">
+            <img src="img/works/work-3.png" alt="Cake">
+            <img src="img/works/work-4.png" alt="Cat">
+            <img src="img/works/work-5.png" alt="Code">
+            <img src="img/works/work-6.png" alt="Work">
+            <img src="img/works/work-7.png" alt="Yummy">
+            <img src="img/works/work-8.png" alt="Grey">
+            <img src="img/works/work-9.png" alt="Bedronka">
+            <img src="img/works/work-10.png" alt="Green">
+          </div>
+        </div>
       </div>
       <a class="view-more" href="#">View more work</a>
     </div>
   </div>
+
   <!---------------------->
 
   <!---TESTIMONIALS-->
@@ -70,7 +89,7 @@
             tidak menderita penyakit apapun!”</p>
 
           <div class="testimonials-client">
-            <img src="images/Herp.png" alt="Herp">
+            <img src="img/Herp.png" alt="Herp">
             <p class="testimonials-client-name">Mr. Herp</p>
             <p class="testimonials-client-company">CEO of Meme, Inc.</p>
         </li>
@@ -83,7 +102,7 @@
             tidak menderita penyakit apapun!”</p>
 
           <div class="testimonials-client">
-            <img src="images/Herp.png" alt="Herp">
+            <img src="img/Herp.png" alt="Herp">
             <p class="testimonials-client-name">Mr. Herp</p>
             <p class="testimonials-client-company">CEO of Meme, Inc.</p>
         </li>
@@ -96,7 +115,7 @@
             tidak menderita penyakit apapun!”</p>
 
           <div class="testimonials-client">
-            <img src="images/Herp.png" alt="Herp">
+            <img src="img/Herp.png" alt="Herp">
             <p class="testimonials-client-name">Mr. Herp</p>
             <p class="testimonials-client-company">CEO of Meme, Inc.</p>
         </li>
@@ -109,7 +128,7 @@
             tidak menderita penyakit apapun!”</p>
 
           <div class="testimonials-client">
-            <img src="images/Herp.png" alt="Herp">
+            <img src="img/Herp.png" alt="Herp">
             <p class="testimonials-client-name">Mr. Herp</p>
             <p class="testimonials-client-company">CEO of Meme, Inc.</p>
         </li>
@@ -129,28 +148,28 @@
     </div>
     <div class="happy-clients-images">
       <div class="happy-clients-wrap">
-        <img src="images/logo-clients/Google-logo.png" alt="Google">
+        <img src="img/logo-clients/Google-logo.png" alt="Google">
       </div>
       <div class="happy-clients-wrap">
-        <img src="images/logo-clients/Yahoo_Logo.png" alt="Yahoo">
+        <img src="img/logo-clients/Yahoo_Logo.png" alt="Yahoo">
       </div>
       <div class="happy-clients-wrap">
-        <img src="images/logo-clients/MSFT_logo.png" alt="Microsoft">
+        <img src="img/logo-clients/MSFT_logo.png" alt="Microsoft">
       </div>
       <div class="happy-clients-wrap">
-        <img src="images/logo-clients/Intel-logo.png" alt="Intel">
+        <img src="img/logo-clients/Intel-logo.png" alt="Intel">
       </div>
       <div class="happy-clients-wrap">
-        <img src="images/logo-clients/qualcomm-logo.png" alt="Qualcomm">
+        <img src="img/logo-clients/qualcomm-logo.png" alt="Qualcomm">
       </div>
       <div class="happy-clients-wrap">
-        <img src="images/logo-clients/cisco-logo.png" alt="Cisco">
+        <img src="img/logo-clients/cisco-logo.png" alt="Cisco">
       </div>
       <div class="happy-clients-wrap">
-        <img src="images/logo-clients/Apple-logo.png" alt="Apple">
+        <img src="img/logo-clients/Apple-logo.png" alt="Apple">
       </div>
       <div class="happy-clients-wrap">
-        <img src="images/logo-clients/ASUS_Logo.png" alt="ASUS">
+        <img src="img/logo-clients/ASUS_Logo.png" alt="ASUS">
       </div>
     </div>
     <a class="all-clients" href="#">See all clients</a>
@@ -158,11 +177,15 @@
   <!--------------------->
 
 </body>
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="js/lightslider.js"></script>
+<script src="js/jquery-multitabs.js"></script>
 <script type="text/javascript">
+
+  $('.tab2').multitabs();
+
   $(document).ready(function () {
     $('#responsive').lightSlider({
       item: 1,
@@ -189,18 +212,7 @@
       ]
     });
   });
-  $("#tabs").on('click', '.ui-tabs-tab', function (event) {
-    event.preventDefault();
-    var tabindex = $(this).data('index');
-    sessionStorage.setItem('tabActiva', tabindex);
-  });
-  var ultimaTabActiva = function () {
-    var data = sessionStorage.getItem('tabActiva');
-    return (data !== null) ? data : 0;
-  }
-  $("#tabs").tabs({
-    active: ultimaTabActiva()
-  });
+
 </script>
 
 
