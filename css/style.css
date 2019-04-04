@@ -51,6 +51,11 @@ header nav ul li {
   font-weight: 300;
   text-transform: capitalize;
 }
+@media screen and (max-width: 1000px) {
+  header nav ul li:not(:first-child) {
+    display: none;
+  }
+}
 header nav ul li a {
   text-decoration: none;
   color: inherit;
@@ -70,12 +75,22 @@ header nav .logo {
   font-size: 2rem;
   color: #fff;
 }
+@media screen and (max-width: 1000px) {
+  header nav .logo {
+    display: none;
+  }
+}
 header nav .search {
   position: absolute;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
+}
+@media screen and (max-width: 1000px) {
+  header nav .search {
+    display: none;
+  }
 }
 header nav .search input[type=text], header nav .search button[type=submit] {
   border: solid 0.1rem transparent;
@@ -104,6 +119,21 @@ header nav .search img {
   padding-left: 0.5rem;
   cursor: pointer;
 }
+@media screen and (max-width: 1000px) {
+  header nav .more {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: #fff;
+  }
+}
+@media screen and (min-width: 1000px) {
+  header nav .more {
+    display: none;
+  }
+}
 
 main {
   width: 100%;
@@ -115,11 +145,29 @@ main {
   padding: 19rem 0 10rem 0;
   z-index: 0;
 }
-main h1 {
-  font-size: 4rem;
-  color: #fff;
-  font-weight: bold;
-  text-transform: capitalize;
+@media screen and (max-width: 500px) {
+  main h1 {
+    font-size: 2.5rem;
+    color: #fff;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 1000px) {
+  main h1 {
+    font-size: 3rem;
+    color: #fff;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+}
+@media screen and (min-width: 1000px) {
+  main h1 {
+    font-size: 4rem;
+    color: #fff;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
 }
 main .mybtn {
   margin-top: 2rem;
@@ -164,7 +212,16 @@ main .scroll-down i {
 }
 .footer-1 .sect {
   width: 28rem;
-  padding: 2rem;
+}
+@media screen and (max-width: 500px) {
+  .footer-1 .sect {
+    padding: 2rem 0;
+  }
+}
+@media screen and (min-width: 500px) {
+  .footer-1 .sect {
+    padding: 2rem;
+  }
 }
 .footer-1 .sect h2 {
   color: #fff;
@@ -258,8 +315,17 @@ main .scroll-down i {
   float: left;
 }
 .footer-1 .sect .footer-section .posts li p {
-  margin-left: 4rem;
   text-transform: capitalize;
+}
+@media screen and (max-width: 500px) {
+  .footer-1 .sect .footer-section .posts li p {
+    margin-left: 4rem;
+  }
+}
+@media screen and (min-width: 500px) {
+  .footer-1 .sect .footer-section .posts li p {
+    margin-left: 4rem;
+  }
 }
 .footer-1 .sect .footer-section .posts li span {
   margin-left: 0.6rem;
@@ -288,11 +354,20 @@ main .scroll-down i {
   display: flex;
   background-color: #fff;
   list-style: none;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  margin: 2rem 9.5rem 0 9.5rem;
-  padding: 0.25rem 0;
   border-radius: 5rem;
+  padding: 0.25rem 0;
+}
+@media screen and (max-width: 500px) {
+  .footer-1 .sect .footer-section .social-media {
+    margin: 30%;
+  }
+}
+@media screen and (min-width: 500px) {
+  .footer-1 .sect .footer-section .social-media {
+    margin: 2rem 9.5rem 0 9.5rem;
+  }
 }
 .footer-1 .sect .footer-section .social-media li {
   margin: 0 0.1rem;
