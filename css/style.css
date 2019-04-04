@@ -230,7 +230,114 @@ body {
 .principal .scroll-down i {
   margin-left: 0.4rem;
 }
+/*OUR LATEST WORKS---------------------------------------------------*/
 
+.section-our-latest-works {
+  width: 100%;
+  background-color: #54d154;
+  color: #828181;
+  padding: 37px 0 63px;
+}
+
+.view-more {
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  padding-left: 16px;
+  text-align: left;
+  background-color: #2b9b2b;
+  width: 185px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 25px;
+  background-image: url('../img/view-more-bg.png');
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+  margin: 40px auto 0;
+  margin-top: 40%;
+}
+
+/*TESTIMONIALS----------------------------------------------------------------*/
+
+.section-testimonials {
+  width: 100%;
+  padding: 35px 0 63px;
+  background-color: #fff;
+  color: #696969;
+}
+
+.testimonials-quotes {
+  text-align: center;
+  max-width: 550px;
+  font-size: 16px;
+  margin: 74px auto 0;
+}
+
+.testimonials-client {
+  max-width: 222px;
+  margin: 20px auto;
+  height: 45px;
+  padding: 5px;
+}
+
+.testimonials-client img {
+  float: left;
+  margin-right: 5px;
+}
+
+.testimonials-client p {
+  display: block;
+  text-align: left;
+  margin: 5px;
+}
+
+.testimonials-client-company {
+  color: #ccc;
+}
+
+/*HAPPY CLIENTS-----------------------------------------------------------------------*/
+
+.section-happy-clients {
+  background-color: #f2f1f1;
+  padding: 37px 0 63px;
+}
+
+.happy-clients-images {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.happy-clients-wrap {
+  flex-basis: 25%;
+  flex-grow: 1;
+}
+
+.happy-clients-images img {
+  display: block;
+  margin: 44px auto 0;
+}
+
+.all-clients {
+  display: block;
+  text-decoration: none;
+  color: #aca5a5;
+  font-size: 18px;
+  padding-left: 16px;
+  text-align: left;
+  background-color: #dddcdc;
+  width: 185px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 25px;
+  background-image: url('../img/all-clients-bg.png');
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+  margin: 60px auto 0;
+}
 .footer-1 {
   background-color: #333;
   box-shadow: inset 0 0 0.5rem #111;
