@@ -38,10 +38,8 @@ header{
       list-style: none;
       display: flex;
       li{
-        &:not(:first-child){
-          @media screen and (max-width:1000px) {
-            display: none;
-          }
+        @media screen and (max-width:1000px) {
+          display: none;
         }
         cursor:pointer;
         margin-right:1rem;
@@ -245,6 +243,7 @@ main{
         }
         .contact-form{
           margin-top: 1rem;
+          padding: 0 2%;
           input[type="text"],input[type="email"],textarea,button[type="submit"]{
             width: 100%;
             border: none;
@@ -330,7 +329,7 @@ main{
         justify-content: space-around;
         align-items: center;
         @media screen and (max-width:500px) {
-          margin:30%;
+          margin: 2rem 30%;
         }
         @media screen and (min-width:500px) {
           margin:2rem 9.5rem 0 9.5rem;
