@@ -87,7 +87,7 @@ header nav ul li {
 }
 
 @media screen and (max-width: 1000px) {
-  header nav ul li:not(:first-child) {
+  header nav ul li {
     display: none;
   }
 }
@@ -435,6 +435,7 @@ main .scroll-down i {
 
 .footer-1 .sect .footer-section .contact-section .contact-form {
   margin-top: 1rem;
+  padding: 0 2%;
 }
 
 .footer-1 .sect .footer-section .contact-section .contact-form input[type=text], .footer-1 .sect .footer-section .contact-section .contact-form input[type=email], .footer-1 .sect .footer-section .contact-section .contact-form textarea, .footer-1 .sect .footer-section .contact-section .contact-form button[type=submit] {
@@ -555,7 +556,7 @@ main .scroll-down i {
 
 @media screen and (max-width: 500px) {
   .footer-1 .sect .footer-section .social-media {
-    margin: 30%;
+    margin: 2rem 30%;
   }
 }
 
