@@ -1,10 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,700");
 @import url("../css/fonts.css");
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 /*---------------------------------------------------*/
 .container {
   max-width: 1170px;
@@ -33,14 +28,17 @@
 }
 
 /*---------------------------------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 *:focus {
   outline: none;
 }
 
 body {
-  width: 100%;
-  background-color: #cfcece;
   font-family: "Montserrat", sans-serif;
 }
 
@@ -50,7 +48,6 @@ body {
   padding: 0 1.5rem;
   z-index: 1;
 }
-
 .header-principal::before {
   content: "";
   position: fixed;
@@ -61,7 +58,6 @@ body {
   box-shadow: 0 0 4rem #000;
 }
 .header-principal .nav-header {
-
   width: 100%;
   height: 3rem;
   position: relative;
@@ -83,7 +79,6 @@ body {
   font-weight: 300;
   text-transform: capitalize;
 }
-
 @media screen and (max-width: 1000px) {
   .header-principal .nav-header ul li {
     display: none;
@@ -108,7 +103,6 @@ body {
   font-size: 2rem;
   color: #fff;
 }
-
 @media screen and (max-width: 1000px) {
   .header-principal .nav-header .logo {
     display: none;
@@ -121,7 +115,6 @@ body {
   transform: translateY(-50%);
   display: flex;
 }
-
 @media screen and (max-width: 1000px) {
   .header-principal .nav-header .search-right {
     display: none;
@@ -154,7 +147,6 @@ body {
   padding-left: 0.5rem;
   cursor: pointer;
 }
-
 @media screen and (max-width: 1000px) {
   .header-principal .nav-header .more {
     position: absolute;
@@ -165,7 +157,6 @@ body {
     color: #fff;
   }
 }
-
 @media screen and (min-width: 1000px) {
   .header-principal .nav-header .more {
     display: none;
@@ -182,7 +173,6 @@ body {
   padding: 19rem 0 10rem 0;
   z-index: 0;
 }
-
 @media screen and (max-width: 500px) {
   .principal .h1-main {
     font-size: 2.5rem;
@@ -191,7 +181,6 @@ body {
     text-transform: capitalize;
   }
 }
-
 @media screen and (min-width: 500px) and (max-width: 1000px) {
   .principal .h1-main {
     font-size: 3rem;
@@ -200,7 +189,6 @@ body {
     text-transform: capitalize;
   }
 }
-
 @media screen and (min-width: 1000px) {
   .principal .h1-main {
     font-size: 4rem;
@@ -242,7 +230,6 @@ body {
 .principal .scroll-down i {
   margin-left: 0.4rem;
 }
-
 /*OUR LATEST WORKS---------------------------------------------------*/
 
 .section-our-latest-works {
@@ -351,7 +338,6 @@ body {
   background-position: right 18px center;
   margin: 60px auto 0;
 }
-
 .footer-1 {
   background-color: #333;
   box-shadow: inset 0 0 0.5rem #111;
@@ -359,17 +345,14 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 }
-
 .footer-1 .sect {
   width: 28rem;
 }
-
 @media screen and (max-width: 500px) {
   .footer-1 .sect {
     padding: 2rem 0;
   }
 }
-
 @media screen and (min-width: 500px) {
   .footer-1 .sect {
     padding: 2rem;
@@ -394,7 +377,6 @@ body {
   top: 125%;
   transform: translate(-50%, -50%);
 }
-
 .footer-1 .sect .footer-section .contenido {
   margin-top: 1rem;
   text-align: center;
@@ -404,28 +386,23 @@ body {
   font-weight: 300;
   line-height: 1.25;
 }
-
 .footer-1 .sect .footer-section .contact-section {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
 }
-
 .footer-1 .sect .footer-section .contact-section p {
   text-align: center;
   color: #aaa;
 }
-
 .footer-1 .sect .footer-section .contact-section .contact-form {
   margin-top: 1rem;
   padding: 0 2%;
 }
-
 .footer-1 .sect .footer-section .contact-section .contact-form input[type=text], .footer-1 .sect .footer-section .contact-section .contact-form input[type=email], .footer-1 .sect .footer-section .contact-section .contact-form textarea, .footer-1 .sect .footer-section .contact-section .contact-form button[type=submit] {
   width: 100%;
   border: none;
 }
-
 .footer-1 .sect .footer-section .contact-section .contact-form input[type=text], .footer-1 .sect .footer-section .contact-section .contact-form input[type=email], .footer-1 .sect .footer-section .contact-section .contact-form textarea {
   margin-bottom: 0.2rem;
   background-color: #444;
@@ -434,21 +411,17 @@ body {
   font-size: 1rem;
   color: #aaa;
 }
-
 .footer-1 .sect .footer-section .contact-section .contact-form input[type=text]::placeholder, .footer-1 .sect .footer-section .contact-section .contact-form input[type=email]::placeholder, .footer-1 .sect .footer-section .contact-section .contact-form textarea::placeholder {
   font-family: "Proxima Nova", sans-serif;
   font-size: 1rem;
 }
-
 .footer-1 .sect .footer-section .contact-section .contact-form input[type=text], .footer-1 .sect .footer-section .contact-section .contact-form input[type=email], .footer-1 .sect .footer-section .contact-section .contact-form button[type=submit] {
   height: 2rem;
 }
-
 .footer-1 .sect .footer-section .contact-section .contact-form input[type=text] {
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
 }
-
 .footer-1 .sect .footer-section .contact-section .contact-form button[type=submit] {
   margin-top: -0.2rem;
   border-bottom-left-radius: 0.5rem;
@@ -458,47 +431,38 @@ body {
   text-transform: uppercase;
   cursor: pointer;
 }
-
 .footer-1 .sect .footer-section .contact-section .contact-form button[type=submit]:hover {
   background-color: #2a8b2a;
 }
-
 .footer-1 .sect .footer-section .contact-section .contact-form textarea {
   padding-top: 0.5rem;
   resize: none;
 }
-
 .footer-1 .sect .footer-section .posts {
   list-style: none;
   position: relative;
 }
-
 .footer-1 .sect .footer-section .posts li {
   text-align: justify;
   display: inline-block;
   margin-top: 1rem;
 }
-
 .footer-1 .sect .footer-section .posts li img {
   float: left;
 }
-
 .footer-1 .sect .footer-section .posts li p {
   text-transform: capitalize;
 }
-
 @media screen and (max-width: 500px) {
   .footer-1 .sect .footer-section .posts li p {
     margin-left: 4rem;
   }
 }
-
 @media screen and (min-width: 500px) {
   .footer-1 .sect .footer-section .posts li p {
     margin-left: 4rem;
   }
 }
-
 .footer-1 .sect .footer-section .posts li span {
   margin-left: 0.6rem;
   padding: 0.4rem;
@@ -510,23 +474,18 @@ body {
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
 }
-
 .footer-1 .sect .footer-section .posts li span.bg-naranja {
   background-color: #f34d04;
 }
-
 .footer-1 .sect .footer-section .posts li span.bg-amarillo {
   background-color: #ffba00;
 }
-
 .footer-1 .sect .footer-section .posts li span.bg-azul {
   background-color: #089dea;
 }
-
 .footer-1 .sect .footer-section .posts li span.bg-verde {
   background-color: #54d154;
 }
-
 .footer-1 .sect .footer-section .social-media {
   display: flex;
   background-color: #fff;
@@ -536,23 +495,19 @@ body {
   border-radius: 5rem;
   padding: 0.25rem 0;
 }
-
 @media screen and (max-width: 500px) {
   .footer-1 .sect .footer-section .social-media {
     margin: 2rem 30%;
   }
 }
-
 @media screen and (min-width: 500px) {
   .footer-1 .sect .footer-section .social-media {
     margin: 2rem 9.5rem 0 9.5rem;
   }
 }
-
 .footer-1 .sect .footer-section .social-media li {
   margin: 0 0.1rem;
 }
-
 .footer-1 .sect .footer-section .social-media li a {
   text-decoration: none;
 }
