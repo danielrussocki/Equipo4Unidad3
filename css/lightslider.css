@@ -169,10 +169,12 @@
 .lSAction > .lSPrev {
     background-position: 0 0;
     left: 10px;
+    background-color: black;
 }
 .lSAction > .lSNext {
     background-position: -32px 0;
     right: 10px;
+    background-color: black;
 }
 .lSAction > a.disabled {
     pointer-events: none;
@@ -220,7 +222,9 @@
 }
 /* vertical */
 
-
+.lSPager{
+    visibility: hidden;
+}
 /* Rtl */
 .lSSlideOuter.lSrtl {
     direction: rtl;
