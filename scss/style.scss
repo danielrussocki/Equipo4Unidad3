@@ -15,7 +15,7 @@ $categories:(
 body{
   font-family: 'Montserrat', sans-serif;
 }
-header{
+.header-principal{
   position: fixed;
   width: 100%;
   padding: 0 1.5rem;
@@ -29,7 +29,7 @@ header{
     height: 1rem;
     box-shadow: 0 0 4rem #000;
   }
-  nav{
+  .nav-header{
     width: 100%;
     height: 3rem;
     position: relative;
@@ -75,7 +75,7 @@ header{
       font-size: 2rem;
       color: #fff;
     }
-    .search{
+    .search-right{
       @media screen and (max-width:1000px) {
         display: none;
       }
@@ -106,7 +106,7 @@ header{
         border-top-right-radius:1rem;
         border-bottom-right-radius:1rem;
       }
-      img{
+      .search-img{
         padding-right: .5rem;
         padding-left: .5rem;
         cursor: pointer;
@@ -127,7 +127,7 @@ header{
     }
   }
 }
-main{
+.principal{
   width: 100%;
   background: url('../img/background.jpg')no-repeat;
   object-fit: cover;
@@ -136,7 +136,7 @@ main{
   text-align: center;
   padding: 19rem 0 10rem 0;
   z-index: 0;
-  h1{
+  .h1-main{
     @media screen and (max-width:500px) {
       font-size: 2.5rem;
       color: #fff;
@@ -204,7 +204,7 @@ main{
     @media screen and (min-width:500px) {
       padding: 2rem;
     }
-    h2{
+    .h2-sect{
       color: #fff;
       position: relative;
       text-align: center;
