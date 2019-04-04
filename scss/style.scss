@@ -1,0 +1,348 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700');
+@import url('../css/fonts.css');
+*{margin:0;padding:0;box-sizing:border-box;}
+$orange:#f34d04;
+$yellow:#ffba00;
+$blue:#089dea;
+$green:#54d154;
+$categories:(
+  naranja:$orange,
+  amarillo:$yellow,
+  azul:$blue,
+  verde:$green
+);
+*:focus{outline: none;}
+body{
+  font-family: 'Montserrat', sans-serif;
+}
+.header-principal{
+  position: fixed;
+  width: 100%;
+  padding: 0 1.5rem;
+  z-index: 1;
+  &::before{
+    content: "";
+    position: fixed;
+    top:-1rem;
+    left: 0;
+    width: 100%;
+    height: 1rem;
+    box-shadow: 0 0 4rem #000;
+  }
+  .nav-header{
+    width: 100%;
+    height: 3rem;
+    position: relative;
+    ul{
+      position: absolute;
+      list-style: none;
+      display: flex;
+      li{
+        @media screen and (max-width:1000px) {
+          display: none;
+        }
+        cursor:pointer;
+        margin-right:1rem;
+        padding-top:.3rem;
+        color: #fff;
+        border-top:solid .3rem transparent;
+        font-family: 'Proxima Nova', sans-serif;
+        font-weight: normal;
+        font-size: 1.25rem;
+        font-weight: 300;
+        text-transform: capitalize;
+        a{
+          text-decoration: none;
+          color: inherit;
+        }
+      }
+      .active{
+        border-top:solid .3rem #54d154;
+        font-weight: bold;
+      }
+    }
+    .logo{
+      @media screen and (max-width:1000px) {
+        display: none;
+      }
+      position: absolute;
+      left:50%;
+      top:50%;
+      transform: translate(-50%,-50%);
+      text-decoration: none;
+      color: inherit;
+      font-family: 'Nautilus Pompilius', sans-serif;
+      font-size: 2rem;
+      color: #fff;
+    }
+    .search-right{
+      @media screen and (max-width:1000px) {
+        display: none;
+      }
+      position:absolute;
+      right:0;
+      top:50%;
+      transform: translateY(-50%);
+      display:flex;
+      input[type="text"],button[type="submit"]{
+        border:solid .1rem transparent;
+        height:2rem;
+        background-color:#ffffffdd;
+      }
+      input[type="text"]{
+        border-top-left-radius:1rem;
+        border-bottom-left-radius:1rem;
+        font-family: 'Proxima Nova', sans-serif;
+        font-size:1rem;
+        padding-left:1rem;
+        width:10rem;
+      }
+      input[type="text"]::placeholder{
+        font-family: 'Proxima Nova', sans-serif;
+        font-weight: 300;
+        font-size:1rem;
+      }
+      button[type="submit"]{
+        border-top-right-radius:1rem;
+        border-bottom-right-radius:1rem;
+      }
+      .search-img{
+        padding-right: .5rem;
+        padding-left: .5rem;
+        cursor: pointer;
+      }
+    }
+    .more{
+      @media screen and (max-width:1000px) {
+        position: absolute;
+        right:0;
+        top:50%;
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+        color: #fff;
+      }
+      @media screen and (min-width:1000px) {
+        display: none;
+      }
+    }
+  }
+}
+.principal{
+  width: 100%;
+  background: url('../img/background.jpg')no-repeat;
+  object-fit: cover;
+  background-size: cover;
+  position: relative;
+  text-align: center;
+  padding: 19rem 0 10rem 0;
+  z-index: 0;
+  .h1-main{
+    @media screen and (max-width:500px) {
+      font-size: 2.5rem;
+      color: #fff;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+    @media screen and (min-width:500px) and (max-width:1000px) {
+      font-size: 3rem;
+      color: #fff;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+    @media screen and (min-width:1000px) {
+      font-size: 4rem;
+      color: #fff;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+  }
+  .mybtn{
+    margin-top: 2rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    padding: .8rem 2rem;
+    border-radius: 3rem;
+    border:none;
+    background-color: #54d154;
+    color: #fff;
+    font-size: 1.5rem;
+    font-family: 'Proxima Nova',sans-serif;
+    &:hover{
+      background-color: #4cbd4c;
+    }
+  }
+  .scroll-down{
+    cursor: pointer;
+    position: absolute;
+    top:95%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: .2rem 1rem;
+    border-radius: 3rem;
+    border: transparent;
+    background-color: #ffffffcc;
+    text-transform: lowercase;
+    font-size: 1.1rem;
+    font-family: 'Proxima Nova',sans-serif;
+    font-weight: 300;
+    i{
+      margin-left: .4rem;
+    }
+  }
+}
+.footer-1{
+  background-color: #333;
+  box-shadow: inset 0 0 .5rem #111;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  .sect{
+    width: 28rem;
+    @media screen and (max-width:500px) {
+      padding: 2rem 0;
+    }
+    @media screen and (min-width:500px) {
+      padding: 2rem;
+    }
+    .h2-sect{
+      color: #fff;
+      position: relative;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 300;
+      font-size: 1.15rem;
+      letter-spacing: .2rem;
+      &::after{
+        content: "";
+        width: 2.5rem;
+        height: .1rem;
+        background-color: #fff;
+        position: absolute;
+        left: 50%;
+        top:125%;
+        transform: translate(-50%,-50%);
+      }
+    }
+    .footer-section{
+      .contenido{
+        margin-top: 1rem;
+        text-align: center;
+        color: #bbb;
+        font-family: 'Proxima Nova',sans-serif;
+        font-size: 1.2rem;
+        font-weight: 300;
+        line-height: 1.25;
+      }
+      .contact-section{
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        p{
+          text-align: center;
+          color:#aaa;
+        }
+        .contact-form{
+          margin-top: 1rem;
+          padding: 0 2%;
+          input[type="text"],input[type="email"],textarea,button[type="submit"]{
+            width: 100%;
+            border: none;
+          }
+          input[type="text"],input[type="email"],textarea{
+            margin-bottom: .2rem;
+            background-color: #444;
+            padding-left: 1rem;
+            font-family: 'Proxima Nova',sans-serif;
+            font-size: 1rem;
+            color:#aaa;
+            &::placeholder{
+              font-family: 'Proxima Nova',sans-serif;
+              font-size: 1rem;
+            }
+          }
+          input[type="text"],input[type="email"],button[type="submit"]{
+            height: 2rem;
+          }
+          input[type="text"]{
+            border-top-left-radius: .5rem;
+            border-top-right-radius: .5rem;
+          }
+          button[type="submit"]{
+            margin-top:-.2rem;
+            border-bottom-left-radius: .5rem;
+            border-bottom-right-radius: .5rem;
+            background-color: #2b9b2b;
+            color:#bbb;
+            text-transform: uppercase;
+            cursor: pointer;
+            &:hover{
+              background-color: #2a8b2a;
+            }
+          }
+          textarea{
+            padding-top:.5rem;
+            resize: none;
+          }
+        }
+      }
+      .posts{
+        list-style: none;
+        position: relative;
+        li{
+          text-align: justify;
+          display: inline-block;
+          margin-top:1rem;
+          img{
+            float: left;
+          }
+          p{
+            @media screen and (max-width:500px) {
+              margin-left: 4rem;
+            }
+            @media screen and (min-width:500px) {
+              margin-left: 4rem;
+            }
+            text-transform: capitalize;
+          }
+          span{
+            margin-left: .6rem;
+            padding: .4rem;
+            background-color: #aaa;
+            text-transform: uppercase;
+            font-size: .8rem;
+            border-radius: .2rem;
+            color: #fff;
+            font-family: 'Montserrat',sans-serif;
+            font-weight: 300;
+          }
+          @each $key,$var in $categories {
+            span.bg-#{$key}{
+              background-color:$var;
+            }
+          }
+        }
+      }
+      .social-media{
+        display: flex;
+        background-color: #fff;
+        list-style: none;
+        justify-content: space-around;
+        align-items: center;
+        @media screen and (max-width:500px) {
+          margin: 2rem 30%;
+        }
+        @media screen and (min-width:500px) {
+          margin:2rem 9.5rem 0 9.5rem;
+        }
+        border-radius: 5rem;
+        padding: .25rem 0;
+        li{
+          margin: 0 .1rem;
+          a{
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}
