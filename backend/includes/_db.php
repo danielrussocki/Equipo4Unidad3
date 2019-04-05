@@ -1,5 +1,5 @@
 <?php
-$server = "equipoproyectoweb.com";
+$server = "209.59.139.37";
 $database = "equipop4_unidad3";
 $user = "equipop4_admin";
 $password = "Proyectounid.2019";
