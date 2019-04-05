@@ -450,7 +450,7 @@ body {
 .team-people img {
   height: 124px;
   width: 124px;
-  border-radius: 62px;
+  border-radius: 50%;
   background-color: #fff;
   object-fit: contain;
 }
