@@ -82,28 +82,28 @@ function carga_foto(){
 function login()
 {
 	global $mysqli;
-	$mail = $_POST["mail"];
+	$mail = $_POST["correo"];
 	$pass = $_POST["password"];
 
 	if (empty($mail) && empty($pass)) {
 		//empty boxes
 		echo "2";
 	} else {
-		$query = "SELECT * FROM usuarios WHERE correo_usr = '$mail'";
+		$query = "SELECT * FROM usuarios WHERE correo = '$mail'";
 		$res = $mysqli->query($query);
 		$row = $res->fetch_assoc();
 		if ($row == 0) {
 			//Correo no existe
 			echo "0";
 		} else {
-			$query = "SELECT * FROM usuarios WHERE correo_usr = '$mail' AND password_usr = '$pass'";
+			$query = "SELECT * FROM usuarios WHERE correo = '$mail' AND password = '$pass'";
 			$res = $mysqli->query($query);
 			$row = mysqli_fetch_array($res);
 			//Si el password no es correcto, imprimir 0
-			if ($row["password_usr"] != $pass) {
+			if ($row["password"] != $pass) {
 				echo "0";
 				//Si el usuario es correcto, imprimir 1
-			} elseif ($mail == $row["correo_usr"] && $pass == $row["password_usr"]) {
+			} elseif ($mail == $row["correo"] && $pass == $row["password"]) {
 				echo "1";
 				session_start();
 				error_reporting(0);

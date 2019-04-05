@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Usuarios</title>
+    <title>Works</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
@@ -26,7 +26,7 @@
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="index.php">Sign out</a>
+                <a class="nav-link" href="#">Sign out</a>
             </li>
         </ul>
     </nav>
@@ -37,9 +37,15 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="usuarios.php">
+                            <a class="nav-link " href="usuarios.php">
                                 <span data-feather="home"></span>
                                 Usuarios <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="banner.php">
+                                <span data-feather="file"></span>
+                                Banner
                             </a>
                         </li>
                         <li class="nav-item">
@@ -49,9 +55,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="works.php">
+                            <a class="nav-link active" href="works.php">
                                 <span data-feather="file"></span>
                                 Works
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="team.php">
+                                <span data-feather="file"></span>
+                                Team
                             </a>
                         </li>
                         <li class="nav-item">
@@ -60,13 +72,25 @@
                                 Testimonial
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="download.php">
+                                <span data-feather="file"></span>
+                                Download
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="footer.php">
+                                <span data-feather="file"></span>
+                                Footer
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="main">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Usuarios</h1>
+                    <h1 class="h2">Works</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
                             <button type="button" class="btn btn-sm btn-outline-danger cancelar">Cancelar</button>
@@ -74,40 +98,41 @@
                         </div>
                     </div>
                 </div>
-                <h2>Consultar Usuarios</h2>
+                <h2>Consultar Works</h2>
                 <div class="table-responsive view" id="show_data">
-                    <table class="table table-striped table-sm" id="list-usuarios">
+                    <table class="table table-striped table-sm" id="list-works">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Teléfono</th>
+                                <th>Work Name</th>
+                                <th>Description</th>
+                                <th>Image</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
                     </table>
                 </div>
+
+
                 <div id="insert_data" class="view">
-                    <form action="#" id="form_data" enctype="multipart/form-data">
+                    <form action="#" id="form_data">
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="nombre">Nombre</label>
-                                    <input type="text" id="nombre" name="nombre" class="form-control">
+                                    <label for="wname">Work Name</label>
+                                    <input type="text" id="work_name" name="wname" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="correo">Correo Electrónico</label>
-                                    <input type="email" id="correo" name="correo" class="form-control">
+                                    <label for="description">Description</label>
+                                    <input type="text" id="work_description" name="description" class="form-control">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="telefono">Teléfono</label>
-                                    <input type="tel" id="telefono" name="telefono" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Contraseña</label>
-                                    <input type="password" id="password" name="password" class="form-control">
+                                    <label for="img">Imagen</label>
+                                    <input type="file" name="foto" id="foto">
+                                    <input type="hidden" readonly="readonly" name="ruta" id="ruta">
+                                    <div id="preview"></div>
                                 </div>
                             </div>
                         </div>
@@ -115,10 +140,9 @@
                             <div class="col">
                                 <button type="button" class="btn btn-success" id="guardar_datos">Guardar</button>
                             </div>
-                        </div>
-                        <div class="box">
-                            <span class="alert alert-danger" id="error" style='display:none;'></span>
-                            <span class="alert alert-success" id="success" style='display:none;'></span>
+                            <div class="box">
+                                <span class="alert alert-danger" id="error" style='display:none;'></span>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -130,7 +154,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <script>
-        //cambia vista
         function change_view(vista = 'show_data') {
             $("#main").find(".view").each(function() {
                 // $(this).addClass("d-none");
@@ -145,7 +168,7 @@
 
         function consultar() {
             let obj = {
-                "accion": "consultar_usuarios"
+                "accion": "consultar_works"
             };
             $.post("includes/_funciones.php", obj, function(respuesta) {
                 let template = ``;
@@ -153,103 +176,87 @@
                     template +=
                         `
           <tr>
-          <td>${e.nombre_usr}</td>
-          <td>${e.telefono_usr}</td>
+          <td>${e.work_name}</td>
+          <td>${e.work_description}</td>
+          <td><img src="${e.work_img}" class="img-thumbnail" width="100" height="100"/></td>
           <td>
           <a href="#" data-id="${e.id}" class="editar_registro">Editar</a>
-          <a href="#" data-id="${e.id}" class="eliminar_usuario">Eliminar</a>
+          <a href="#" data-id="${e.id}" class="eliminar_registro">Eliminar</a>
           </td>
           </tr>
           `;
                 });
-                $("#list-usuarios tbody").html(template);
+                $("#list-works tbody").html(template);
             }, "JSON");
         }
         $(document).ready(function() {
             consultar();
             change_view();
         });
-
-        //form change
         $("#nuevo_registro").click(function() {
             change_view('insert_data');
+            $("#guardar_datos").text("Guardar").data("editar", 0);
+            $("#preview").html("");
+            $('#ruta').attr('value', '');
+            $("#form_data")[0].reset();
         });
 
-        //insertar usuario
+        //INSERTAR
         $("#guardar_datos").click(function() {
-            let nombre = $("#nombre").val();
-            let correo = $("#correo").val();
-            let telefono = $("#telefono").val();
-            let password = $("#password").val();
+            let work_name = $('#work_name').val();
+            let work_description = $('#work_description').val();
+            let work_img = $('#ruta').val();
             let obj = {
-                "accion": "insertar_usuario",
-                "nombre": nombre,
-                "correo": correo,
-                "telefono": telefono,
-                "password": password
-            }
+                "accion": "insertar_work",
+                "work_name": work_name,
+                "work_description": work_description,
+                "work_img": work_img
+            };
             $("#form_data").find("input").each(function() {
                 $(this).removeClass("has-error");
                 if ($(this).val() != "") {
                     obj[$(this).prop("name")] = $(this).val();
                 } else {
-                    $(this).addClass("has-error");
+                    $(this).addClass("has-error").focus();
                     return false;
                 }
             });
-            //boton change insertar to edit
             if ($(this).data("editar") == 1) {
-                obj["accion"] = "editar_usuario";
-                obj["id"] = $(this).data('id');
+                obj["accion"] = "editar_work";
+                obj["id"] = $(this).data("id");
+                $(this).text("Guardar").data("editar", 0);
+                $("#form_data")[0].reset();
             }
-            $.post("includes/_funciones.php", obj, function(r) {
-                if (r == 0) {
+            $.post("includes/_funciones.php", obj, function(respuesta) {
+                if (respuesta == 0) {
                     $("#error").html("Campos vacios").fadeIn();
                 }
-                if (r == 1) {
+                if (respuesta == 1) {
                     location.reload();
                 }
             });
         });
 
 
-        //eliminar usuario
-        $("#main").on("click", ".eliminar_usuario", function(e) {
-            e.preventDefault();
-            let confirmacion = confirm('¿Desea eliminar este registro?');
-            if (confirmacion) {
-                let id = $(this).data('id'),
-                    obj = {
-                        "accion": "eliminar_usuario",
-                        "id": id
-                    };
-
-                $.post("includes/_funciones.php", obj, function(r) {
-                    if (r == 0) {
-                        $("#error").html("Error al eliminar").fadeIn();
-                    }
-                    if (r == 1) {
-                        location.reload();
-                    }
-                });
-            }
-        });
-
-        //editar usuario
-        $("#list-usuarios").on("click", ".editar_registro", function(e) {
+        //EDITAR
+        $('#list-works').on("click", ".editar_registro", function(e) {
             let id = $(this).data('id'),
                 obj = {
-                    "accion": "consultar_usuario",
+                    "accion": "consultar_work",
                     "id": id
                 };
             $("#form_data")[0].reset();
-            change_view("insert_data");
-            $("#guardar_datos").text("Editar").data("editar", 1).data('id', id);
-            $.post('includes/_funciones.php', obj, function(r) {
-                $("#nombre").val(r.nombre);
-                $("#correo").val(r.correo);
-                $("#telefono").val(r.telefono);
-                $("#password").val(r.password);
+            change_view('insert_data');
+            $("#guardar_datos").text("Editar").data("editar", 1).data("id", id);
+            $.post("includes/_funciones.php", obj, function(r) {
+                $("#work_name").val(r.work_name);
+                $("#work_description").val(r.work_description);
+                let template =
+                    `
+                    <img src="${r.work_img}" class="img-thumbnail" width="200" height="200"/>
+                    `;
+                $("#ruta").val(r.work_img);
+                $("#preview").html(template);
             }, "JSON");
             if (r == 0) {
                 $("#error").html("Error al editar").fadeIn();
@@ -257,18 +264,62 @@
             if (r == 1) {
                 location.reload();
             }
-
         });
 
-        //cancel button
+
+        //ELIMINAR
+        $("#main").on("click", ".eliminar_registro", function(e) {
+            e.preventDefault();
+            let confirmacion = confirm('Desea eliminar este registro?');
+            if (confirmacion) {
+                let id = $(this).data('id'),
+                    obj = {
+                        "accion": "eliminar_work",
+                        "id": id
+                    };
+                $.post("includes/_funciones.php", obj, function(respuesta) {
+                    if (respuesta == 0) {
+                        $("#error").html("Error al eliminar").fadeIn();
+                    }
+                    if (respuesta == 1) {
+                        location.reload();
+                    }
+                });
+            }
+        });
+        //imagen
+        $("#foto").on("change", function(e) {
+            let formDatos = new FormData($("#form_data")[0]);
+            formDatos.append("accion", "carga_foto");
+            $.ajax({
+                url: "includes/_funciones.php",
+                type: "POST",
+                data: formDatos,
+                contentType: false,
+                processData: false,
+                success: function(datos) {
+                    let respuesta = JSON.parse(datos);
+                    if (respuesta.status == 0) {
+                        alert("no se cargo la imagen");
+                    }
+                    let template =
+                        `
+                    <img src="${respuesta.archivo}" class="img-thumbnail" width="200" height="200"/>
+                    `;
+                    $("#ruta").val(respuesta.archivo);
+                    $("#preview").html(template);
+                }
+            });
+        });
         $("#main").find(".cancelar").click(function() {
             change_view();
             $("#form_data")[0].reset();
-            $("#form_data").find("input").each(function() {
-                $(this).removeClass("has-error");
-            });
-            $("#error").hide();
-            $("#success").hide();
+            $("#preview").html("");
+            $("#preview").html("");
+            if ($("#guardar_datos").data("editar") == 1) {
+                $("#guardar_datos").text("Guardar").data("editar", 0);
+                consultar();
+            }
         });
     </script>
 </body>

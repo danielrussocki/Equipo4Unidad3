@@ -1,8 +1,8 @@
 <?php
-	session_start();
-	error_reporting(0);
-	$varsesion = $_SESSION['auth'];
-	if (isset($varsesion)){
+    session_start();
+    error_reporting(0);
+    $varsesion = $_SESSION['auth'];
+    if (isset($varsesion)){
 ?>
 <!doctype html>
 <html lang="en">
@@ -13,11 +13,12 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Usuarios</title>
+    <title>Clients</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
     <link href="css/estilos.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/unid-ico.ico">
 </head>
 
 <body>
@@ -35,15 +36,20 @@
         <div class="row">
             <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                 <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
+                <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="usuarios.php">
-                                <span data-feather="home"></span>
-                                Usuarios <span class="sr-only">(current)</span>
+                            <a class="nav-link " href="usuarios.php">
+                                Usuarios
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="features.php">
+                            <a class="nav-link" href="banner.php">
+                                <span data-feather="file"></span>
+                                Banner
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="features.php">
                                 <span data-feather="file"></span>
                                 Features
                             </a>
@@ -55,9 +61,25 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="team.php">
+                                <span data-feather="file"></span>
+                                Team
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="testimonial.php">
                                 <span data-feather="file"></span>
                                 Testimonial
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="download.php">
+                                Download
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="footer.php">
+                                Footer
                             </a>
                         </li>
                     </ul>
@@ -66,7 +88,7 @@
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="main">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Usuarios</h1>
+                    <h1 class="h2">Clients</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
                             <button type="button" class="btn btn-sm btn-outline-danger cancelar">Cancelar</button>
@@ -74,13 +96,14 @@
                         </div>
                     </div>
                 </div>
-                <h2>Consultar Usuarios</h2>
+                <h2>Consultar Features</h2>
                 <div class="table-responsive view" id="show_data">
-                    <table class="table table-striped table-sm" id="list-usuarios">
+                    <table class="table table-striped table-sm" id="list-clients">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Teléfono</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Image</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -92,23 +115,15 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="nombre">Nombre</label>
-                                    <input type="text" id="nombre" name="nombre" class="form-control">
+                                    <label for="title">Title</label>
+                                    <input type="text" id="title" name="title" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="correo">Correo Electrónico</label>
-                                    <input type="email" id="correo" name="correo" class="form-control">
+                                    <label for="texto">Description</label>
+                                    <input type="text" id="description" name="description" class="form-control">
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="telefono">Teléfono</label>
-                                    <input type="tel" id="telefono" name="telefono" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Contraseña</label>
-                                    <input type="password" id="password" name="password" class="form-control">
-                                </div>
+                            
                             </div>
                         </div>
                         <div class="row">
@@ -116,7 +131,7 @@
                                 <button type="button" class="btn btn-success" id="guardar_datos">Guardar</button>
                             </div>
                         </div>
-                        <div class="box">
+                        <div class="mensaje">
                             <span class="alert alert-danger" id="error" style='display:none;'></span>
                             <span class="alert alert-success" id="success" style='display:none;'></span>
                         </div>
@@ -130,65 +145,61 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <script>
-        //cambia vista
+        //cambio vista
         function change_view(vista = 'show_data') {
-            $("#main").find(".view").each(function() {
-                // $(this).addClass("d-none");
+            $("#main").find(".view").each(function () {
                 $(this).slideUp('fast');
                 let id = $(this).attr("id");
                 if (vista == id) {
                     $(this).slideDown(300);
-                    // $(this).removeClass("d-none");
                 }
             });
         }
-
+       //consulta
         function consultar() {
             let obj = {
-                "accion": "consultar_usuarios"
+                "accion": "consultar_features"
             };
-            $.post("includes/_funciones.php", obj, function(respuesta) {
+            $.post("includes/_funciones.php", obj, function (respuesta) {
                 let template = ``;
-                $.each(respuesta, function(i, e) {
+                $.each(respuesta, function (i, e) {
                     template +=
                         `
           <tr>
-          <td>${e.nombre_usr}</td>
-          <td>${e.telefono_usr}</td>
+          <td>${e.title}</td>
+          <td>${e.description}</td>
+          <td><img src="${e.img}" class="img-thumbnail" width="100" height="100"/></td>
           <td>
-          <a href="#" data-id="${e.id}" class="editar_registro">Editar</a>
-          <a href="#" data-id="${e.id}" class="eliminar_usuario">Eliminar</a>
+          <a href="#" data-id="${e.id}" class="editar_features">Editar</a>
+          <a href="#" data-id="${e.id}" class="eliminar_features">Eliminar</a>
           </td>
           </tr>
           `;
                 });
-                $("#list-usuarios tbody").html(template);
+                $("#list-clients tbody").html(template);
             }, "JSON");
         }
-        $(document).ready(function() {
-            consultar();
-            change_view();
-        });
 
-        //form change
-        $("#nuevo_registro").click(function() {
+        $("#nuevo_registro").click(function () {
             change_view('insert_data');
+            $("#h2-title").text("Insertar Feature");
+            $("#guardar_datos").text("Guardar").data("editar", 0);
+            $("#preview").html("");
+            $('#ruta').attr('value', '');
+            $("#form_data")[0].reset();
         });
-
-        //insertar usuario
-        $("#guardar_datos").click(function() {
-            let nombre = $("#nombre").val();
-            let correo = $("#correo").val();
-            let telefono = $("#telefono").val();
-            let password = $("#password").val();
+        //insertar
+        $("#guardar_datos").click(function () {
+            let title = $("#title").val();
+            let description = $("#description").val();
+            let img = $('#ruta').val();
             let obj = {
-                "accion": "insertar_usuario",
-                "nombre": nombre,
-                "correo": correo,
-                "telefono": telefono,
-                "password": password
+                "accion": "insertar_client",
+                "tilte": titulo,
+                "description": texto,
+                "img": img
             }
-            $("#form_data").find("input").each(function() {
+            $("#form_data").find("input").each(function () {
                 $(this).removeClass("has-error");
                 if ($(this).val() != "") {
                     obj[$(this).prop("name")] = $(this).val();
@@ -197,85 +208,113 @@
                     return false;
                 }
             });
-            //boton change insertar to edit
             if ($(this).data("editar") == 1) {
-                obj["accion"] = "editar_usuario";
+                obj["accion"] = "editar_features";
                 obj["id"] = $(this).data('id');
             }
-            $.post("includes/_funciones.php", obj, function(r) {
-                if (r == 0) {
-                    $("#error").html("Campos vacios").fadeIn();
-                }
-                if (r == 1) {
-                    location.reload();
-                }
+            $.post("includes/_funciones.php", obj, function (respuesta) {
+                if (respuesta == 0) {
+                        $("#error").html("Campos vacios").fadeIn();
+                    }
+                    if (respuesta == 1) {
+                        location.reload();
+                    }
             });
         });
-
-
-        //eliminar usuario
-        $("#main").on("click", ".eliminar_usuario", function(e) {
+        //eliminar
+        $("#main").on("click", ".eliminar_features", function (e) {
             e.preventDefault();
             let confirmacion = confirm('¿Desea eliminar este registro?');
             if (confirmacion) {
                 let id = $(this).data('id'),
                     obj = {
-                        "accion": "eliminar_usuario",
+                        "accion": "eliminar_feature",
                         "id": id
                     };
-
-                $.post("includes/_funciones.php", obj, function(r) {
-                    if (r == 0) {
+                $.post("includes/_funciones.php", obj, function (respuesta) {
+                    if (respuesta == 0) {
                         $("#error").html("Error al eliminar").fadeIn();
                     }
-                    if (r == 1) {
+                    if (respuesta == 1) {
                         location.reload();
                     }
                 });
             }
         });
-
-        //editar usuario
-        $("#list-usuarios").on("click", ".editar_registro", function(e) {
+       
+        $("#list-features").on("click", ".editar_features", function (e) {
+            e.preventDefault();
             let id = $(this).data('id'),
                 obj = {
-                    "accion": "consultar_usuario",
+                    "accion": "consultar_feature",
                     "id": id
                 };
             $("#form_data")[0].reset();
-            change_view("insert_data");
-            $("#guardar_datos").text("Editar").data("editar", 1).data('id', id);
-            $.post('includes/_funciones.php', obj, function(r) {
-                $("#nombre").val(r.nombre);
-                $("#correo").val(r.correo);
-                $("#telefono").val(r.telefono);
-                $("#password").val(r.password);
+            change_view('insert_data');
+            $("#h2-title").text("Editar Feature");
+            $("#guardar_datos").text("Editar").data("editar", 1).data("id", id);
+            $.post("includes/_funciones.php", obj, function (r) {
+                $("#title").val(r.titulo);
+                $("#description").val(r.texto);
+                let template =
+                    `
+                    <img src="${r.img}" class="img-thumbnail" width="200" height="200"/>
+                    `;
+                $("#ruta").val(r.img);
+                $("#preview").html(template);
             }, "JSON");
-            if (r == 0) {
-                $("#error").html("Error al editar").fadeIn();
-            }
-            if (r == 1) {
-                location.reload();
-            }
-
         });
-
-        //cancel button
-        $("#main").find(".cancelar").click(function() {
+        
+        $(document).ready(function () {
+            consultar();
+            change_view();
+        });
+        //imagen
+        $("#foto").on("change", function (e) {
+            let formDatos = new FormData($("#form_data")[0]);
+            formDatos.append("accion", "carga_foto");
+            $.ajax({
+                url: "includes/_funciones.php",
+                type: "POST",
+                data: formDatos,
+                contentType: false,
+                processData: false,
+                success: function (datos) {
+                    let respuesta = JSON.parse(datos);
+                    if (respuesta.status == 0) {
+                        alert("No se cargó la foto");
+                    }
+                    let template =
+                        `
+          <img src="${respuesta.archivo}" class="img-thumbnail" width="200" height="200"/>
+          `;
+                    $("#ruta").val(respuesta.archivo);
+                    $("#preview").html(template);
+                }
+            });
+        });
+        //BOTON CANCELAR
+        $("#main").find(".cancelar").click(function () {
             change_view();
             $("#form_data")[0].reset();
-            $("#form_data").find("input").each(function() {
+            $("#form_data").find("input").each(function () {
                 $(this).removeClass("has-error");
             });
             $("#error").hide();
             $("#success").hide();
+            $("#h2-title").text("Consultar Usuarios");
+            $("#preview").html("");
+            if ($("#guardar_datos").data("editar") == 1) {
+                $("#guardar_datos").text("Guardar").data("editar", 0);
+                consultar();
+            }
         });
     </script>
 </body>
 
-</html> 
+</html>
 <?php
-	}else{
-		header("Location:index.php");
-	}
+    }else{
+        header("Location:index.php");
+    }
 ?>

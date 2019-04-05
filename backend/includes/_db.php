@@ -1,7 +1,7 @@
 <?php
 $server = "209.59.139.37";
 $database = "equipop4_unidad3";
-$user = "equipop4_admin";
+$user = "equipop4";
 $password = "Proyectounid.2019";
 
 $mysqli = new mysqli($server, $user, $password, $database);
