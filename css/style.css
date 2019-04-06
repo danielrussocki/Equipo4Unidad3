@@ -10,26 +10,34 @@
 .container-centered {
   text-align: center;
 }
-
-.section-title {
+.section-title, .section-title-green{
   position: relative;
   display: block;
   margin: 0 auto 13px;
   text-transform: uppercase;
   font-size: 20px;
-  font-weight: 300;
+  font-weight: normal;
   letter-spacing: 3px;
+  font-family: "Montserrat", sans-serif;
 }
-.section-title::after{
+.section-title-green {
+  color: #207b20;
+}
+.section-title::after, .section-title-green::after{
   content: "";
   position: absolute;
   width: 44px;
   height: 2px;
   border: 0;
-  background-color: #828181;
   top: 120%;
   left: 50%;
   transform: translate(-50%,-50%);
+}
+.section-title::after{
+  background-color: #828181;
+}
+.section-title-green::after{
+  background-color: #207b20;
 }
 .line {
   width: 44px;
@@ -253,14 +261,16 @@ body {
   text-align: center;
 }
 
-.section-title {
+/* .section-title {
   display: block;
   margin: 0 auto 13px;
   text-transform: uppercase;
   font-size: 20px;
   font-weight: 300;
   letter-spacing: 3px;
-}
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+} */
 
 .linea {
   width: 44px;
@@ -273,16 +283,29 @@ body {
   color: #d6d3d3;
   text-align: center;
   margin-top: 12px;
+  margin-bottom: 1rem;
+}
+.section-description-green {
+  color: #207b20;
+  text-align: center;
+  margin-top: 12px;
+  margin-bottom: 1rem;
 }
 
 .lorem {
-  height: 333px;
-  width: 284px;
+  height: 23rem;
+  width: 14rem;
   text-align: center;
   display: inline-block;
   vertical-align: top;
   font-size: 15px;
   margin: 0 45px;
+}
+.lorem>h3{
+  margin: 1.5rem auto 1rem auto;
+}
+.lorem>p{
+  color:#828181;
 }
 
 .lorem-logo {
@@ -309,16 +332,18 @@ body {
 
 .learn_more {
   display: block;
+  padding: .55rem 0.25rem;
   text-decoration: none;
   color: #fff;
   font-size: 16px;
-  padding-top: 9px;
   line-height: 12px;
   background-color: #54d154;
   width: 120px;
-  height: 20px;
+  height: 30px;
   border-radius: 15px;
   margin: 30px auto;
+  font-family: 'Proxima Nova', sans-serif;
+  font-weight: bold;
 }
 /*OUR LATEST WORKS---------------------------------------------------*/
 
@@ -338,19 +363,18 @@ body {
   padding-left: 16px;
   text-align: left;
   background-color: #2b9b2b;
-  width: 185px;
+  width: 12.25rem;
   height: 40px;
   line-height: 40px;
   border-radius: 25px;
   margin: 40px auto 0;
-  margin-top: 40%;
 }
 .view-more img{
   position: absolute;
   width: 1rem;
   margin: 0 .5rem;
   top: 50%;
-  left: 89%;
+  left: 85%;
   transform: translate(-50%,-50%);
 }
 
@@ -412,7 +436,9 @@ body {
   flex-basis: 25%;
   flex-grow: 1;
 }
-
+.dnone{
+  display: none;
+}
 .happy-clients-images img {
   display: block;
   margin: 44px auto 0;
@@ -434,17 +460,19 @@ body {
   background-repeat: no-repeat;
   background-position: right 18px center;
   margin: 60px auto 0;
+  cursor: pointer;
 }
 /* MEET THE TEAM */
 .section-team {
   background-color: #54d154;
-  padding: 37px 0 63px;
+  padding: 2rem 0 2.5rem;
 }
 
 .team-people {
-  width: 920px;
+  /* width: 920px; */
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   margin: 0 auto;
 }
 

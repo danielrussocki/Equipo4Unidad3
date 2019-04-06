@@ -2,6 +2,12 @@ $('header nav ul li').click(function(){
     $('header nav ul li').removeClass('active');
     $(this).addClass('active');
 });
+$('#allClients').click(function(){
+    $('.happy-clients-wrap').removeClass('dnone');
+    $('#allClients').css({
+        'display':'none'
+    });
+});
 $(document).ready(function(){
     scrolling();
 });
