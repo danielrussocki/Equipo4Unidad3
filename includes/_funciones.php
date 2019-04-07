@@ -1,6 +1,24 @@
-<?php
+<?php 
 include_once("_db.php");
 switch ($_POST["accion"]) {
+	case 'login':
+		login();
+		break;
+	case 'consultar_usuarios':
+		consultar_usuarios();
+		break;
+	case 'consultar_usuario':
+		consultar_usuario($_POST['id']);
+		break;
+	case 'editar_usuario':
+		editar_usuario();
+		break;
+	case 'insertar_usuario':
+		insertar_usuario();
+		break;
+	case 'eliminar_usuario':
+		eliminar_usuario($_POST['id']);
+		break;
 	case 'carga_foto':
 		carga_foto();
 		break;
@@ -36,14 +54,12 @@ switch ($_POST["accion"]) {
 	case 'eliminar_testimonial':
 		eliminar_testimonial($_POST['id']);
 		break;
-
-
-
-	default:
+	
+		
+		default:
 		break;
 }
-function carga_foto()
-{
+function carga_foto(){
 	if (isset($_FILES["foto"])) {
 		$file = $_FILES["foto"];
 		$nombre = $_FILES["foto"]["name"];
@@ -52,16 +68,124 @@ function carga_foto()
 		$tam = $_FILES["foto"]["size"];
 		$dir = "../img/upload/";
 		$respuesta = [
-			"archivo" => "/img/team4-logo.png",
+			"archivo" => "img/logo.png",
 			"status" => 0
 		];
-		if (move_uploaded_file($temporal, $dir . $nombre)) {
-			$respuesta["archivo"] = "img/upload/" . $nombre;
+		if(move_uploaded_file($temporal, $dir.$nombre)){
+			$respuesta["archivo"] = "img/upload/".$nombre;
 			$respuesta["status"] = 1;
 		}
 		echo json_encode($respuesta);
 	}
 }
+
+function login()
+{
+	global $mysqli;
+	$mail = $_POST["correo"];
+	$pass = $_POST["password"];
+
+	if (empty($mail) && empty($pass)) {
+		//empty boxes
+		echo "2";
+	} else {
+		$query = "SELECT * FROM usuarios WHERE correo = '$mail'";
+		$res = $mysqli->query($query);
+		$row = $res->fetch_assoc();
+		if ($row == 0) {
+			//Correo no existe
+			echo "0";
+		} else {
+			$query = "SELECT * FROM usuarios WHERE correo = '$mail' AND password = '$pass'";
+			$res = $mysqli->query($query);
+			$row = mysqli_fetch_array($res);
+			//Si el password no es correcto, imprimir 0
+			if ($row["password"] != $pass) {
+				echo "0";
+				//Si el usuario es correcto, imprimir 1
+			} elseif ($mail == $row["correo"] && $pass == $row["password"]) {
+				echo "1";
+				session_start();
+				error_reporting(0);
+				$_SESSION['auth'] = $mail;
+			}
+		}
+	}
+}
+
+function consultar_usuarios()
+{
+	global $mysqli;
+	$query = "SELECT * FROM usuarios";
+	$res = mysqli_query($mysqli, $query);
+	$arreglo = [];
+	while ($fila = mysqli_fetch_array($res)) {
+		array_push($arreglo, $fila);
+	}
+	echo json_encode($arreglo); //Imprime el JSON ENCODEADO
+}
+
+function insertar_usuario()
+{
+	global $mysqli;
+	$nombre = $_POST["nombre"];
+	$tel = $_POST["telefono"];
+	$mail = $_POST["correo"];
+	$pass = $_POST["password"];
+
+	if (empty($nombre) && empty($mail) && empty($tel) && empty($pass)) {
+		echo "0";
+	} elseif (empty($nombre)) {
+		echo "0";
+	} elseif (empty($mail)) {
+		echo "0";
+	} elseif (empty($tel)) {
+		echo "0";
+	} elseif (empty($pass)) {
+		echo "0";
+	} else {
+
+		$query = "INSERT INTO usuarios (id, correo, password, nombre, telefono)  VALUES ('','$mail','$pass','$nombre','$tel')";
+		$res = mysqli_query($mysqli, $query);
+		echo "1";
+	}
+}
+
+function eliminar_usuario($id)
+{
+	global $mysqli;
+	$query = "DELETE FROM usuarios WHERE id = $id";
+	$res = $mysqli->query($query);
+	if ($res) {
+		echo "1";
+	} else {
+		echo "0";
+	}
+}
+
+function consultar_usuario($id)
+{
+	global $mysqli;
+	$query = "SELECT * FROM usuarios WHERE id = $id";
+	$res = $mysqli->query($query);
+	$fila = mysqli_fetch_array($res);
+	echo json_encode($fila); //Imprime Json encodeado	
+}
+
+function editar_usuario()
+{
+	global $mysqli;
+	extract($_POST);
+	$query = "UPDATE usuarios SET correo = '$correo', password = '$password', nombre = '$nombre', telefono = '$telefono'
+	WHERE id = '$id'";
+	$res = $mysqli->query($query);
+	if ($res) {
+		echo "1";
+	} else {
+		echo "0";
+	}
+}
+
 
 
 //WORKS PART
@@ -88,7 +212,7 @@ function consultar_work($id)
 }
 
 function insertar_work()
-{
+{  
 	global $mysqli;
 	$work_name = $_POST["work_name"];
 	$work_description = $_POST["work_description"];
@@ -135,7 +259,7 @@ function eliminar_work($id)
 }
 
 
-//TESTIMONIAL
+//TESTIMONIAL PART
 
 function consultar_testimonials()
 {
@@ -152,35 +276,35 @@ function consultar_testimonials()
 function consultar_testimonial($id)
 {
 	global $mysqli;
-	$query = "SELECT * FROM testimonials WHERE test_id = $id";
+	$query = "SELECT * FROM testimonials WHERE id = $id";
 	$res = $mysqli->query($query);
 	$fila = mysqli_fetch_array($res);
 	echo json_encode($fila); //Imprime Json encodeado	
 }
 
 function insertar_testimonial()
-{
+{  
 	global $mysqli;
 	$description = $_POST["description"];
 	$quote = $_POST["quote"];
-	$logo = $_POST["ruta"];
+	$img = $_POST["img"];
 	$name = $_POST["name"];
 	$puesto = $_POST["puesto"];
-
-	if (empty($description) && empty($quote) && empty($logo) && empty($name)  && empty($puesto)) {
+	
+	if (empty($description) && empty($quote) && empty($img) && empty($name)  && empty($puesto)) {
 		echo "0";
 	} elseif (empty($description)) {
 		echo "0";
 	} elseif (empty($quote)) {
 		echo "0";
-	} elseif (empty($logo)) {
+	} elseif (empty($img)) {
 		echo "0";
 	} elseif (empty($name)) {
 		echo "0";
 	} elseif (empty($puesto)) {
 		echo "0";
 	} else {
-		$query = "INSERT INTO testimonials VALUES ('','$description','$quote','$logo', '$name', '$puesto')";
+		$query = "INSERT INTO testimonials VALUES ('','$description','$quote','$img', '$name', '$puesto')";
 		$res = mysqli_query($mysqli, $query);
 		echo "1";
 	}
@@ -190,8 +314,8 @@ function editar_testimonial()
 {
 	global $mysqli;
 	extract($_POST);
-	$query = "UPDATE testimonials SET test_description = '$description', test_quote = '$quote', test_img = '$ruta', test_name = '$name', test_puesto = '$puesto'
-	WHERE test_id = '$id'";
+	$query = "UPDATE testimonials SET description = '$description', quote = '$quote', img = '$img', name = '$name', puesto = '$puesto'
+	WHERE id = '$id'";
 	$res = $mysqli->query($query);
 	if ($res) {
 		echo "1";
@@ -203,7 +327,7 @@ function editar_testimonial()
 function eliminar_testimonial($id)
 {
 	global $mysqli;
-	$query = "DELETE FROM testimonials WHERE test_id = $id";
+	$query = "DELETE FROM testimonials WHERE id = $id";
 	$res = $mysqli->query($query);
 	if ($res) {
 		echo "1";

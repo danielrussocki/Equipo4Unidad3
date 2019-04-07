@@ -12,3 +12,4 @@ function scrolling(){
         }, 1500);
     });
 }
+
