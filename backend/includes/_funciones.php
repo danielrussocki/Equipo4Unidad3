@@ -353,18 +353,25 @@ function kill_session(){
 function insertar_header(){
     global $mysqli;
     $title=$_POST['title'];$text_btn=$_POST['text_btn'];
-    $header_href=$_POST['header_href'];$file=$_POST['file'];
-    $query = "INSERT INTO header VALUES('','$file','$title','$text_btn','$header_href')";
+	$header_href=$_POST['header_href'];$file=$_POST['file'];
+	$ruta = "img/upload/";
+	$info = pathinfo($file);
+	$file_name = $ruta.$info['basename'];
+    $query = "INSERT INTO header VALUES('','$file_name','$title','$text_btn','$header_href')";
 	$mysqli->query($query);
 	if(empty($title)||empty($header_href)||empty($text_btn)||empty($file)){
 		echo "0";
+	} else {
+		echo "1";
 	}
-	echo "1";
 }
 function editar_header(){
 	global $mysqli;
 	extract($_POST);
-	$query = "UPDATE header SET header_background = '$file', header_title = '$title', header_button = '$text_btn', header_href = '$header_href' WHERE header_id = $id";
+	$ruta = "img/upload/";
+	$info = pathinfo($file);
+	$file_name = $ruta.$info['basename'];
+	$query = "UPDATE header SET header_background = '$file_name', header_title = '$title', header_button = '$text_btn', header_href = '$header_href' WHERE header_id = $id";
 	$respuesta = $mysqli->query($query);
 	if($respuesta){
 		echo "1";

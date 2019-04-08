@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <h2>Header</h2>
+                <h2>Footer</h2>
                 <div class="table-responsive view" id="show_data">
                     <table class="table table-striped table-sm" id="list_header">
                         <thead>

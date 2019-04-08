@@ -43,6 +43,13 @@
                             </span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="footer.php">
+                            <span data-feather="file">
+                            Footer
+                            </span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
