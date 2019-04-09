@@ -72,6 +72,69 @@ switch ($_POST["accion"]) {
 	case 'eliminar_header':
 		eliminar_header($_POST['id']);
 		break;
+	case 'consultar_footers':
+		consultar_footers();
+		break;
+	case 'insertar_footer':
+		insertar_footer();
+		break;
+	case 'consultar_footer':
+		consultar_footer($_POST['id']);
+		break;
+	case 'editar_footer':
+		editar_footer();
+		break;
+	case 'eliminar_footer':
+		eliminar_footer($_POST['id']);
+		break;
+	case 'form_contact':
+		form_contact();
+		break;
+	case 'consultar_categories':
+		consultar_categories();
+		break;
+	case 'consultar_category':
+		consultar_category($_POST['id']);
+		break;
+	case 'editar_category':
+		editar_category();
+		break;
+	case 'eliminar_category':
+		eliminar_category($_POST['id']);
+		break;
+	case 'insertar_category':
+		insertar_category();
+		break;
+	case 'consultar_contacts':
+		consultar_contacts();
+		break;
+	case 'consultar_contact':
+		consultar_contact($_POST['id']);
+		break;
+	case 'insertar_contact':
+		insertar_contact();
+		break;
+	case 'editar_contact':
+		editar_contact();
+		break;
+	case 'eliminar_contact':
+		eliminar_contact($_POST['id']);
+		break;
+	case 'consultar_form_contacts':
+		consultar_form_contacts();
+		break;
+	case 'consultar_form_contact':
+		consultar_form_contact($_POST['id']);
+		break;
+	case 'insertar_form_contact':
+		insertar_form_contact();
+		break;
+	case 'editar_form_contact':
+		editar_form_contact();
+		break;
+	case 'eliminar_form_contact':
+		eliminar_form_contact($_POST['id']);
+		break;
 	default:
 		break;
 }
@@ -382,6 +445,203 @@ function editar_header(){
 function eliminar_header($id){
 	global $mysqli;
 	$query = "DELETE FROM header WHERE header_id = '$id'";
+	$respuesta = $mysqli->query($query);
+	if($respuesta){
+		echo "1";
+	}else{
+		echo "0";
+	}
+}
+function consultar_footers(){
+	global $mysqli;
+	$query = "SELECT * FROM aboutUs";
+	$respuesta = $mysqli->query($query);
+	$arreglo = [];
+	while($fila=mysqli_fetch_array($respuesta)){
+		array_push($arreglo,$fila);
+	}
+	echo json_encode($arreglo);
+}
+function insertar_footer(){
+	global $mysqli;
+	$footer_content = $_POST['footer_content'];
+	$query = "INSERT INTO aboutUs VALUES('','$footer_content',0)";	
+	if(empty($footer_content)){
+		echo "0";
+	} else {
+		$mysqli->query($query);
+		echo "1";
+	}
+}
+function consultar_footer($id){
+	global $mysqli;
+	$query = "SELECT * FROM aboutUs WHERE footer_id = '$id'";
+	$respuesta = $mysqli->query($query);
+	$fila = mysqli_fetch_array($respuesta);
+	echo json_encode($fila);
+}
+function editar_footer(){
+	global $mysqli;
+	extract($_POST);
+	$query = "UPDATE aboutUs SET footer_content = '$footer_content' WHERE footer_id = '$id'";
+	$respuesta = $mysqli->query($query);
+	if($respuesta){
+		echo "1";
+	} else {
+		echo "0";
+	}
+}
+function eliminar_footer($id){
+	global $mysqli;
+	$query = "DELETE FROM aboutUs WHERE footer_id = '$id'";
+	$respuesta = $mysqli->query($query);
+	if($respuesta){
+		echo "1";
+	}else{
+		echo "0";
+	}
+}
+function form_contact(){
+	global $mysqli;
+	extract($_POST);
+	$query = "INSERT INTO contactForm VALUES('','$form_name','$form_email','$form_message')";
+	if(empty($form_name)||empty($form_email)||empty($form_message)){
+		echo "0";
+	}else{
+		$mysqli->query($query);
+		echo "1";
+	}
+}
+function consultar_categories(){
+	global $mysqli;
+	$query = "SELECT * FROM recentPosts";
+	$respuesta = $mysqli->query($query);
+	$arreglo = [];
+	while($fila = mysqli_fetch_array($respuesta)){
+		array_push($arreglo,$fila);
+	}
+	echo json_encode($arreglo);
+}
+function consultar_category($id){
+	global $mysqli;
+	$query = "SELECT * FROM recentPosts WHERE post_id = $id";
+	$respuesta = $mysqli->query($query);
+	$fila = mysqli_fetch_array($respuesta);
+	echo json_encode($fila);
+}
+function insertar_category(){
+	global $mysqli;
+	extract($_POST);
+	$ruta = "img/upload/";
+	$info = pathinfo($file);
+	$file_name = $ruta.$info['basename'];
+	$query = "INSERT INTO recentPosts VALUES('','$file_name','$title','$category')";
+	if(empty($file)||empty($title)||empty($category)){
+		echo "0";
+	}else{
+		$mysqli->query($query);
+		echo "1";
+	}
+}
+function eliminar_category($id){
+	global $mysqli;
+	$query = "DELETE FROM recentPosts WHERE post_id = $id";
+	$respuesta = $mysqli->query($query);
+	if($respuesta){
+		echo "1";
+	}else{
+		echo "0";
+	}
+}
+function editar_category(){
+	global $mysqli;
+	extract($_POST);
+	$ruta = "img/upload/";
+	$info = pathinfo($file);
+	$file_name = $ruta.$info['basename'];
+	$query = "UPDATE recentPosts SET post_file = '$file_name', post_text = '$title', post_category = '$category' WHERE post_id = $id";
+	$respuesta = $mysqli->query($query);
+	if($respuesta){
+		echo "1";
+	} else {
+		echo "0";
+	}
+}
+function consultar_contacts(){
+	global $mysqli;
+	$query = "SELECT * FROM contactUs";
+	$respuesta = $mysqli->query($query);
+	$arreglo = [];
+	while($fila = mysqli_fetch_array($respuesta)){
+		array_push($arreglo,$fila);
+	}
+	echo json_encode($arreglo);
+}
+function consultar_contact($id){
+	global $mysqli;
+	$query = "SELECT * FROM contactUs WHERE contact_id = $id";
+	$respuesta = $mysqli->query($query);
+	$fila = mysqli_fetch_array($respuesta);
+	echo json_encode($fila);
+}
+function insertar_contact(){
+	global $mysqli;
+	extract($_POST);
+	$query = "INSERT INTO contactUs VALUES('','$address','$location','$email','$phone','$fax')";
+	if(empty($address)||empty($location)||empty($email)||empty($phone)||empty($fax)){
+		echo "0";
+	}else{
+		$mysqli->query($query);
+		echo "1";
+	}
+}
+function editar_contact(){
+	global $mysqli;
+	extract($_POST);
+	$query = "UPDATE contactUs SET contact_address = '$address', contact_location = '$location', contact_email = '$email', contact_phone = '$phone', contact_fax = '$fax' WHERE contact_id = $id";
+	$respuesta = $mysqli->query($query);
+	if($respuesta){
+		echo "1";
+	}else{
+		echo "0";
+	}
+}
+function eliminar_contact($id){
+	global $mysqli;
+	$query = "DELETE FROM contactUs WHERE contact_id = $id";
+	$respuesta = $mysqli->query($query);
+	if($respuesta){
+		echo "1";
+	}else{
+		echo "0";
+	}
+}
+function consultar_form_contacts(){
+	global $mysqli;
+	$query = "SELECT * FROM contactForm";
+	$respuesta = $mysqli->query($query);
+	$arreglo = [];
+	while($fila = mysqli_fetch_array($respuesta)){
+		array_push($arreglo,$fila);
+	}
+	echo json_encode($arreglo);
+}
+function consultar_form_contact($id){
+	global $mysqli;
+	$query = "SELECT * FROM contactForm WHERE form_id = $id";
+	$respuesta = $mysqli->query($query);
+	$fila = mysqli_fetch_array($respuesta);
+	echo json_encode($fila);
+}
+function insertar_form_contact(){
+
+}
+function editar_form_contact(){
+	
+}
+function eliminar_form_contact($id){
+	global $mysqli;
+	$query = "DELETE FROM contactForm WHERE form_id = $id";
 	$respuesta = $mysqli->query($query);
 	if($respuesta){
 		echo "1";

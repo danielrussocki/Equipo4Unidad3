@@ -367,11 +367,11 @@
                     <p>Email: Username@email.com</p>
                     <p>Phone: +1 (0) 123 4567 890</p>
                     <p>Fax: +1 (0) 321 4567 890</p>
-                    <form class="contact-form">
-                        <input type="text" placeholder="Your name...">
-                        <input type="email" placeholder="Your email...">
-                        <textarea name="" id="" cols="30" rows="10" placeholder="Your message..."></textarea>
-                        <button type="submit">Send</button>
+                    <form class="contact-form" if="contactForm">
+                        <input type="text" placeholder="Your name..." id="formName">
+                        <input type="email" placeholder="Your email..." id="formEmail">
+                        <textarea id="formMessage" cols="30" rows="10" placeholder="Your message..."></textarea>
+                        <button type="button" id="submitForm">Send</button>
                     </form>
                 </div>
             </div>
@@ -412,7 +412,34 @@
                 ]
             });
         });
-
+        $('#submitForm').click(function(){
+            let formName = $('#formName').val();
+            let formEmail = $('#formEmail').val();
+            let formMessage = $('#formMessage').val();
+            let obj = {
+                "accion":"form_contact",
+                "form_name":formName,
+                "form_email":formEmail,
+                "form_message":formMessage
+            };
+            $("#contactForm").find("input").each(function() {
+                $(this).removeClass("has-error");
+                if ($(this).val() != "") {
+                    obj[$(this).prop("name")] = $(this).val();
+                } else {
+                    $(this).addClass("has-error");
+                    return false;
+                }
+            });
+            $.post("backend/includes/_funciones.php",obj,function(e){
+                if (e == 0) {
+                    alert("Campos vacíos");
+                }
+                if (e == 1) {
+                    location.reload();
+                }
+            });
+        });
     </script>
 </body>
 

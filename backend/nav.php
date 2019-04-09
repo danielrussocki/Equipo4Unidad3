@@ -46,7 +46,28 @@
                     <li class="nav-item">
                         <a class="nav-link" href="footer.php">
                             <span data-feather="file">
-                            Footer
+                            About us
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categories.php">
+                            <span data-feather="file">
+                            Recent Posts
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contactus.php">
+                            <span data-feather="file">
+                            Contact Us
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="messages.php">
+                            <span data-feather="file">
+                            Messages
                             </span>
                         </a>
                     </li>

@@ -609,7 +609,7 @@ body {
   margin-top: 1rem;
   padding: 0 2%;
 }
-.footer-1 .sect .footer-section .contact-section .contact-form input[type=text], .footer-1 .sect .footer-section .contact-section .contact-form input[type=email], .footer-1 .sect .footer-section .contact-section .contact-form textarea, .footer-1 .sect .footer-section .contact-section .contact-form button[type=submit] {
+.footer-1 .sect .footer-section .contact-section .contact-form input[type=text], .footer-1 .sect .footer-section .contact-section .contact-form input[type=email], .footer-1 .sect .footer-section .contact-section .contact-form textarea, .footer-1 .sect .footer-section .contact-section .contact-form button[type=button] {
   width: 100%;
   border: none;
 }
@@ -625,14 +625,14 @@ body {
   font-family: "Proxima Nova", sans-serif;
   font-size: 1rem;
 }
-.footer-1 .sect .footer-section .contact-section .contact-form input[type=text], .footer-1 .sect .footer-section .contact-section .contact-form input[type=email], .footer-1 .sect .footer-section .contact-section .contact-form button[type=submit] {
+.footer-1 .sect .footer-section .contact-section .contact-form input[type=text], .footer-1 .sect .footer-section .contact-section .contact-form input[type=email], .footer-1 .sect .footer-section .contact-section .contact-form button[type=button] {
   height: 2rem;
 }
 .footer-1 .sect .footer-section .contact-section .contact-form input[type=text] {
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
 }
-.footer-1 .sect .footer-section .contact-section .contact-form button[type=submit] {
+.footer-1 .sect .footer-section .contact-section .contact-form button[type=button] {
   margin-top: -0.2rem;
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
@@ -641,7 +641,7 @@ body {
   text-transform: uppercase;
   cursor: pointer;
 }
-.footer-1 .sect .footer-section .contact-section .contact-form button[type=submit]:hover {
+.footer-1 .sect .footer-section .contact-section .contact-form button[type=button]:hover {
   background-color: #2a8b2a;
 }
 .footer-1 .sect .footer-section .contact-section .contact-form textarea {
