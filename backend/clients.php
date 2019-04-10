@@ -57,6 +57,7 @@ if (isset($varsesion)) {
                                 <input type="text" id="descripcion" name="descripcion" class="form-control">
                             </div>
                         </div>
+                        <div class="col"></div>
                     </div>
                     <div class="row">
                         <div class="col">
@@ -67,9 +68,9 @@ if (isset($varsesion)) {
                         <span class="alert alert-danger" id="error" style='display:none;'></span>
                         <span class="alert alert-success" id="success" style='display:none;'></span>
                     </div>
-                </form>
             </div>
-            
+            </form>
+            </div>
         </main>
         </div>
         </div>
@@ -100,15 +101,15 @@ if (isset($varsesion)) {
                     $.each(respuesta, function(i, e) {
                         template +=
                             `
-                      <tr>
-                      <td>${e.client_title}</td>
-                      <td>${e.client_description}</td>
-                      <td>
-                      <a href="#" data-id="${e.client_id}" class="editar_registro">Editar</a>
-                      <a href="#" data-id="${e.client_id}" class="eliminar_registro">Eliminar</a>
-                      </td>
-                      </tr>
-                      `;
+                            <tr>
+                            <td>${e.client_title}</td>
+                            <td>${e.client_description}</td>
+                            <td>
+                            <a href="#" data-id="${e.client_id}" class="editar_registro">Editar</a>
+                            <a href="#" data-id="${e.client_id}" class="eliminar_registro">Eliminar</a>
+                            </td>
+                            </tr>
+                            `;
                     });
                     $("#list-clients tbody").html(template);
                 }, "JSON");

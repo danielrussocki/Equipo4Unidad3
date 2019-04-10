@@ -62,8 +62,8 @@ switch ($_POST["accion"]) {
 	case 'eliminar_testimonial':
 		eliminar_testimonial($_POST['id']);
 		break;
-		
-		//clients
+
+		//CLIENTS
 	case 'consultar_clients':
 		consultar_clients();
 		break;
@@ -80,7 +80,19 @@ switch ($_POST["accion"]) {
 		eliminar_client($_POST['id']);
 		break;
 
+	case 'consultar_clientimg':
+		consultar_clientimg();
+		break;
+	case 'eliminar_clientimg':
+		eliminar_clientimg($_POST['id']);
+		break;
 
+	case 'consultar_workimg':
+		consultar_workimg();
+		break;
+	case 'eliminar_workimg':
+		eliminar_workimg($_POST['id']);
+		break;
 
 	default:
 		break;
@@ -247,7 +259,7 @@ function insertar_work()
 	$tab1 = $_POST["tab1"];
 	$tab2 = $_POST["tab2"];
 	$tab3 = $_POST["tab3"];
-	
+
 	if (empty($titulo) && empty($descripcion) && empty($tab1) && empty($tab2) && empty($tab3)) {
 		echo "0";
 	} elseif (empty($titulo)) {
@@ -429,6 +441,56 @@ function eliminar_client($id)
 {
 	global $mysqli;
 	$query = "DELETE FROM clients WHERE client_id = $id";
+	$res = $mysqli->query($query);
+	if ($res) {
+		echo "1";
+	} else {
+		echo "0";
+	}
+}
+
+
+////
+function consultar_clientimg()
+{
+	global $mysqli;
+	$query = "SELECT * FROM clients_img";
+	$res = mysqli_query($mysqli, $query);
+	$arreglo = [];
+	while ($fila = mysqli_fetch_array($res)) {
+		array_push($arreglo, $fila);
+	}
+	echo json_encode($arreglo); //Imprime el JSON ENCODEADO
+}
+
+function eliminar_clientimg($id)
+{
+	global $mysqli;
+	$query = "DELETE FROM clients_img WHERE clientimg_id = $id";
+	$res = $mysqli->query($query);
+	if ($res) {
+		echo "1";
+	} else {
+		echo "0";
+	}
+}
+
+function consultar_workimg()
+{
+	global $mysqli;
+	$query = "SELECT * FROM works_img";
+	$res = mysqli_query($mysqli, $query);
+	$arreglo = [];
+	while ($fila = mysqli_fetch_array($res)) {
+		array_push($arreglo, $fila);
+	}
+	echo json_encode($arreglo); //Imprime el JSON ENCODEADO
+}
+
+function eliminar_workimg($id)
+{
+	global $mysqli;
+	$query = "DELETE FROM works_img WHERE worksimg_id = $id";
 	$res = $mysqli->query($query);
 	if ($res) {
 		echo "1";

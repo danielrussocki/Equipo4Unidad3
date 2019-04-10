@@ -38,6 +38,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="imgworks.php">
+                            <span data-feather="file"></span>
+                            IMG-works
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="testimonials.php">
                             <span data-feather="file"></span>
                             Testimonial
@@ -47,6 +53,12 @@
                         <a class="nav-link" href="clients.php">
                             <span data-feather="file"></span>
                             Clients
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="imgclients.php">
+                            <span data-feather="file"></span>
+                            IMG-Clients
                         </a>
                     </li>
                 </ul>

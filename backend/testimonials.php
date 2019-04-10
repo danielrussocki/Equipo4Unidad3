@@ -66,7 +66,7 @@ if (isset($varsesion)) {
                             <div class="form-group">
                                 <label for="img">Logo</label>
                                 <br>
-                                <input type="file" name="foto" id="foto">
+                                <input type="file" name="foto" id="foto" >
                                 <input type="hidden" name="ruta" id="ruta" readonly="readonly">
                                 <div id="preview"></div>
                             </div>
