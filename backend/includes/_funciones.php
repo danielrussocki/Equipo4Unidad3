@@ -4,6 +4,12 @@ switch ($_POST["accion"]) {
 	case 'login':
 		login();
 		break;
+	case 'kill_session':
+        kill_session();
+		break;
+	case 'carga_foto':
+		carga_foto();
+		break;
 	case 'consultar_usuarios':
 		consultar_usuarios();
 		break;
@@ -18,9 +24,6 @@ switch ($_POST["accion"]) {
 		break;
 	case 'eliminar_usuario':
 		eliminar_usuario($_POST['id']);
-		break;
-	case 'carga_foto':
-		carga_foto();
 		break;
 		//Works
 	case 'consultar_works':
@@ -54,9 +57,36 @@ switch ($_POST["accion"]) {
 	case 'eliminar_testimonial':
 		eliminar_testimonial($_POST['id']);
 		break;
-    case 'kill_session':
-        kill_session();
-        break;
+		// CLIENTS
+	case 'consultar_clients':
+		consultar_clients();
+		break;
+	case 'consultar_client':
+		consultar_client($_POST['id']);
+		break;
+	case 'insertar_client':
+		insertar_client();
+		break;
+	case 'editar_client':
+		editar_client();
+		break;
+	case 'eliminar_client':
+		eliminar_client($_POST['id']);
+		break;
+		// CLIENT IMG
+	case 'consultar_clientimg':
+		consultar_clientimg();
+		break;
+	case 'eliminar_clientimg':
+		eliminar_clientimg($_POST['id']);
+		break;
+	case 'consultar_workimg':
+		consultar_workimg();
+		break;
+	case 'eliminar_workimg':
+		eliminar_workimg($_POST['id']);
+		break;
+		// HEADER
     case 'consultar_headers':
         consultar_headers();
 		break;
@@ -189,6 +219,13 @@ function login()
 		}
 	}
 }
+function kill_session(){
+    session_start();
+	error_reporting(0);
+	session_destroy();
+	echo "index.php";
+}
+// USUARIOS
 function consultar_usuarios()
 {
 	global $mysqli;
@@ -390,6 +427,120 @@ function eliminar_testimonial($id)
 		echo "0";
 	}
 }
+// CLIENTS
+function consultar_clients()
+{
+	global $mysqli;
+	$query = "SELECT * FROM clients";
+	$res = mysqli_query($mysqli, $query);
+	$arreglo = [];
+	while ($fila = mysqli_fetch_array($res)) {
+		array_push($arreglo, $fila);
+	}
+	echo json_encode($arreglo); //Imprime el JSON ENCODEADO
+}
+
+function consultar_client($id)
+{
+	global $mysqli;
+	$query = "SELECT * FROM clients WHERE client_id = $id";
+	$res = $mysqli->query($query);
+	$fila = mysqli_fetch_array($res);
+	echo json_encode($fila); //Imprime Json encodeado	
+}
+
+function insertar_client()
+{
+	global $mysqli;
+	$title = $_POST["titulo"];
+	$description = $_POST["descripcion"];
+	if (empty($title) && empty($description)) {
+		echo "0";
+	} elseif (empty($title)) {
+		echo "0";
+	} elseif (empty($description)) {
+		echo "0";
+	} else {
+		$query = "INSERT INTO clients VALUES ('','$title','$description')";
+		$res = mysqli_query($mysqli, $query);
+		echo "1";
+	}
+}
+
+function editar_client()
+{
+	global $mysqli;
+	extract($_POST);
+	$query = "UPDATE clients SET client_title = '$titulo', client_description = '$descripcion'
+	WHERE client_id = '$id'";
+	$res = $mysqli->query($query);
+	if ($res) {
+		echo "1";
+	} else {
+		echo "0";
+	}
+}
+
+function eliminar_client($id)
+{
+	global $mysqli;
+	$query = "DELETE FROM clients WHERE client_id = $id";
+	$res = $mysqli->query($query);
+	if ($res) {
+		echo "1";
+	} else {
+		echo "0";
+	}
+}
+// IMG-CLIENT
+function consultar_clientimg()
+{
+	global $mysqli;
+	$query = "SELECT * FROM clients_img";
+	$res = mysqli_query($mysqli, $query);
+	$arreglo = [];
+	while ($fila = mysqli_fetch_array($res)) {
+		array_push($arreglo, $fila);
+	}
+	echo json_encode($arreglo); //Imprime el JSON ENCODEADO
+}
+
+function eliminar_clientimg($id)
+{
+	global $mysqli;
+	$query = "DELETE FROM clients_img WHERE clientimg_id = $id";
+	$res = $mysqli->query($query);
+	if ($res) {
+		echo "1";
+	} else {
+		echo "0";
+	}
+}
+
+function consultar_workimg()
+{
+	global $mysqli;
+	$query = "SELECT * FROM works_img";
+	$res = mysqli_query($mysqli, $query);
+	$arreglo = [];
+	while ($fila = mysqli_fetch_array($res)) {
+		array_push($arreglo, $fila);
+	}
+	echo json_encode($arreglo); //Imprime el JSON ENCODEADO
+}
+
+function eliminar_workimg($id)
+{
+	global $mysqli;
+	$query = "DELETE FROM works_img WHERE worksimg_id = $id";
+	$res = $mysqli->query($query);
+	if ($res) {
+		echo "1";
+	} else {
+		echo "0";
+	}
+}
+// HEADER
 function consultar_headers(){
     global $mysqli;
     $query = "SELECT * FROM header";
@@ -406,12 +557,6 @@ function consultar_header($id){
 	$respuesta = $mysqli->query($query);
 	$fila = mysqli_fetch_array($respuesta);
 	echo json_encode($fila);
-}
-function kill_session(){
-    session_start();
-	error_reporting(0);
-	session_destroy();
-	echo "index.php";
 }
 function insertar_header(){
     global $mysqli;
