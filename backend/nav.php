@@ -18,42 +18,16 @@
                             Usuarios <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="features.php">
-                            <span data-feather="file"></span>
-                            Features
-                        </a>
-                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="works.php">
                             <span data-feather="file"></span>
                             Works
                         </a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="testimonial.php">
-                            <span data-feather="file"></span>
-                            Testimonial
-                        </a>
-                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="header.php">
                             <span data-feather="file">
                             Header
-                            </span>
-                        </a>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="features.php">
-                            <span data-feather="file">
-                            Features
-                            </span>
-                        </a>
-                    </li> -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="works.php">
-                            <span data-feather="file">
-                            Works
                             </span>
                         </a>
                     </li>
