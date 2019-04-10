@@ -19,27 +19,43 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="features.php">
-                            <span data-feather="file"></span>
-                            Features
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="works.php">
                             <span data-feather="file"></span>
                             Works
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="testimonial.php">
-                            <span data-feather="file"></span>
-                            Testimonial
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="header.php">
                             <span data-feather="file">
                             Header
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="imgworks.php">
+                            <span data-feather="file">
+                            IMG-works
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="testimonials.php">
+                            <span data-feather="file">
+                            Testimonials
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="clients.php">
+                            <span data-feather="file">
+                            Clients
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="imgclients.php">
+                            <span data-feather="file">
+                            IMG-Clients
                             </span>
                         </a>
                     </li>
