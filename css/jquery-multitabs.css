@@ -1,11 +1,16 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,700");
+@import url("../css/fonts.css");
 .tab__header {
   display: block;
   clear: both;
-  margin: 62px auto 43px;
+  margin: 3rem auto 43px;
+  font-family: 'Proxima Nova',sans-serif;
+  font-size: 0;
 }
 
 .tab__header>div:last-of-type {
   border-radius: 0 16px 16px 0;
+  border-right: 1px solid #2b9b2b;
 }
 
 .tab__header>div:first-of-type {
@@ -15,9 +20,12 @@
 .tab__header>div {
   display: inline-block;
   text-decoration: none;
-  border: 1px solid #2b9b2b;
+  border-left: 1px solid #2b9b2b;
+  border-top: 1px solid #2b9b2b;
+  border-bottom: 1px solid #2b9b2b;
+  border-right: .25px solid #2b9b2b;
   font-size: 16px;
-  padding: 15px;
+  padding: 10px;
   background-color: #fff;
   color: #2b9b2b;
 }
@@ -42,7 +50,7 @@
 .tab__content>div {
   display: inline-block;
   vertical-align: top;
-  float: left;
+  /* float: left; */
   display: none;
   max-width: 980px;
   margin: 0 auto;

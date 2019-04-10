@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Usuarios</title>
+    <title>Messages</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
@@ -26,21 +26,22 @@
     ?>
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="main">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Usuarios</h1>
+                    <h1 class="h2">Messages</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
                             <button type="button" class="btn btn-sm btn-outline-danger cancelar">Cancelar</button>
-                            <button type="button" class="btn btn-sm btn-outline-success" id="nuevo_registro">Nuevo</button>
+                            <button type="button" class="btn btn-sm btn-outline-success" id="nuevo_contact">Nuevo</button>
                         </div>
                     </div>
                 </div>
-                <h2>Consultar Usuarios</h2>
+                <h2>Contact us</h2>
                 <div class="table-responsive view" id="show_data">
-                    <table class="table table-striped table-sm" id="list-usuarios">
+                    <table class="table table-striped table-sm" id="list_form_contact">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Teléfono</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Message</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -48,26 +49,23 @@
                     </table>
                 </div>
                 <div id="insert_data" class="view">
-                    <form action="#" id="form_data" enctype="multipart/form-data">
+                    <form id="form_data">
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="nombre">Nombre</label>
-                                    <input type="text" id="nombre" name="nombre" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="correo">Correo Electrónico</label>
-                                    <input type="email" id="correo" name="correo" class="form-control">
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="Dirección">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="telefono">Teléfono</label>
-                                    <input type="tel" id="telefono" name="telefono" class="form-control">
+                                    <input type="text" id="email" name="email" class="form-control" placeholder="Ubicación">
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
                                 <div class="form-group">
-                                    <label for="password">Contraseña</label>
-                                    <input type="password" id="password" name="password" class="form-control">
+                                    <textarea class="form-control" name="message" id="message" cols="30" rows="10"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -104,24 +102,27 @@
         }
         function consultar() {
             let obj = {
-                "accion": "consultar_usuarios"
+                "accion": "consultar_form_contacts"
             };
+            checar_obj(obj);
             $.post("includes/_funciones.php", obj, function(respuesta) {
                 let template = ``;
                 $.each(respuesta, function(i, e) {
+                    console.log(i,e);
                     template +=
                         `
           <tr>
-          <td>${e.nombre_usr}</td>
-          <td>${e.telefono_usr}</td>
+          <td>${e.form_name}</td>
+          <td>${e.form_email}</td>
+          <td>${e.form_text}</td>
           <td>
-          <a href="#" data-id="${e.id_usr}" class="editar_registro">Editar</a>
-          <a href="#" data-id="${e.id_usr}" class="eliminar_usuario">Eliminar</a>
+          <a href="#" data-id="${e.form_id}" class="editar_form_contact">Editar</a>
+          <a href="#" data-id="${e.form_id}" class="eliminar_form_contact">Eliminar</a>
           </td>
           </tr>
           `;
                 });
-                $("#list-usuarios tbody").html(template);
+                $("#list_form_contact tbody").html(template);
             }, "JSON");
         }
         $(document).ready(function() {
@@ -129,22 +130,20 @@
             change_view();
         });
         //form change
-        $("#nuevo_registro").click(function() {
+        $("#nuevo_contact").click(function() {
             change_view('insert_data');
         });
-        //insertar usuario
+        //insertar header
         $("#guardar_datos").click(function() {
-            let nombre = $("#nombre").val();
-            let correo = $("#correo").val();
-            let telefono = $("#telefono").val();
-            let password = $("#password").val();
+            let name = $("#name").val();
+            let email = $("#email").val();
+            let message = $("#message").val();
             let obj = {
-                "accion": "insertar_usuario",
-                "nombre": nombre,
-                "correo": correo,
-                "telefono": telefono,
-                "password": password
-            }
+                "accion": "insertar_form_contact",
+                "name": name,
+                "email": email,
+                "message":message
+            };
             $("#form_data").find("input").each(function() {
                 $(this).removeClass("has-error");
                 if ($(this).val() != "") {
@@ -154,9 +153,10 @@
                     return false;
                 }
             });
+            checar_obj(obj);
             //boton change insertar to edit
             if ($(this).data("editar") == 1) {
-                obj["accion"] = "editar_usuario";
+                obj["accion"] = "editar_form_contact";
                 obj["id"] = $(this).data('id');
             }
             $.post("includes/_funciones.php", obj, function(r) {
@@ -168,14 +168,14 @@
                 }
             });
         });
-        //eliminar usuario
-        $("#main").on("click", ".eliminar_usuario", function(e) {
+        //eliminar header
+        $("#main").on("click", ".eliminar_form_contact", function(e) {
             e.preventDefault();
             let confirmacion = confirm('¿Desea eliminar este registro?');
             if (confirmacion) {
                 let id = $(this).data('id'),
                     obj = {
-                        "accion": "eliminar_usuario",
+                        "accion": "eliminar_form_contact",
                         "id": id
                     };
                 $.post("includes/_funciones.php", obj, function(r) {
@@ -189,26 +189,25 @@
             }
         });
         //editar usuario
-        $("#list-usuarios").on("click", ".editar_registro", function(e) {
+        $("#list_form_contact").on("click", ".editar_form_contact", function(e) {
             let id = $(this).data('id'),
                 obj = {
-                    "accion": "consultar_usuario",
+                    "accion": "consultar_form_contact",
                     "id": id
                 };
             $("#form_data")[0].reset();
             change_view("insert_data");
             $("#guardar_datos").text("Editar").data("editar", 1).data('id', id);
             $.post('includes/_funciones.php', obj, function(r) {
-                $("#nombre").val(r.nombre_usr);
-                $("#correo").val(r.correo_usr);
-                $("#telefono").val(r.telefono_usr);
-                $("#password").val(r.password_usr);
+                $("#name").val(r.form_name);
+                $("#email").val(r.form_email);
+                $("#message").val(r.form_text);
             }, "JSON");
             if (r == 0) {
                 $("#error").html("Error al editar").fadeIn();
             }
             if (r == 1) {
-                location.reload();
+                window.location.reload(true);
             }
         });
         //cancel button
@@ -229,6 +228,11 @@
             window.location.href = xd;
             });
         });
+        function checar_obj(objeto){
+            $.each(objeto,function(i,e){
+                console.log(i,e);
+            });
+        }
     </script>
 </body>
 

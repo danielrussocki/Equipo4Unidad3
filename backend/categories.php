@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Usuarios</title>
+    <title>Categories</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
@@ -26,21 +26,22 @@
     ?>
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4" id="main">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Usuarios</h1>
+                    <h1 class="h2">Dashboard</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
                             <button type="button" class="btn btn-sm btn-outline-danger cancelar">Cancelar</button>
-                            <button type="button" class="btn btn-sm btn-outline-success" id="nuevo_registro">Nuevo</button>
+                            <button type="button" class="btn btn-sm btn-outline-success" id="nuevo_header">Nuevo</button>
                         </div>
                     </div>
                 </div>
-                <h2>Consultar Usuarios</h2>
+                <h2>Categories</h2>
                 <div class="table-responsive view" id="show_data">
-                    <table class="table table-striped table-sm" id="list-usuarios">
+                    <table class="table table-striped table-sm" id="list_post">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Teléfono</th>
+                                <th>Category</th>
+                                <th>File</th>
+                                <th>Text</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -48,26 +49,25 @@
                     </table>
                 </div>
                 <div id="insert_data" class="view">
-                    <form action="#" id="form_data" enctype="multipart/form-data">
+                    <form id="form_data" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col">
-                                <div class="form-group">
-                                    <label for="nombre">Nombre</label>
-                                    <input type="text" id="nombre" name="nombre" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="correo">Correo Electrónico</label>
-                                    <input type="email" id="correo" name="correo" class="form-control">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="validatedCustomFile" name="foto" required>
+                                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                    <div class="invalid-feedback">Example invalid custom file feedback</div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="telefono">Teléfono</label>
-                                    <input type="tel" id="telefono" name="telefono" class="form-control">
+                                    <input type="text" id="title" name="title" class="form-control" placeholder="Título">
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
                                 <div class="form-group">
-                                    <label for="password">Contraseña</label>
-                                    <input type="password" id="password" name="password" class="form-control">
+                                    <input type="text" id="category" name="category" class="form-control" placeholder="Botón">
                                 </div>
                             </div>
                         </div>
@@ -104,24 +104,27 @@
         }
         function consultar() {
             let obj = {
-                "accion": "consultar_usuarios"
+                "accion": "consultar_categories"
             };
+            checar_obj(obj);
             $.post("includes/_funciones.php", obj, function(respuesta) {
                 let template = ``;
                 $.each(respuesta, function(i, e) {
+                    console.log(i,e);
                     template +=
                         `
           <tr>
-          <td>${e.nombre_usr}</td>
-          <td>${e.telefono_usr}</td>
+          <td>${e.post_category}</td>
+          <td>${e.post_file}</td>
+          <td>${e.post_text}</td>
           <td>
-          <a href="#" data-id="${e.id_usr}" class="editar_registro">Editar</a>
-          <a href="#" data-id="${e.id_usr}" class="eliminar_usuario">Eliminar</a>
+          <a href="#" data-id="${e.post_id}" class="editar_category">Editar</a>
+          <a href="#" data-id="${e.post_id}" class="eliminar_category">Eliminar</a>
           </td>
           </tr>
           `;
                 });
-                $("#list-usuarios tbody").html(template);
+                $("#list_post tbody").html(template);
             }, "JSON");
         }
         $(document).ready(function() {
@@ -129,21 +132,51 @@
             change_view();
         });
         //form change
-        $("#nuevo_registro").click(function() {
+        $("#nuevo_header").click(function() {
             change_view('insert_data');
         });
-        //insertar usuario
+        //Foto
+        $('#validatedCustomFile').on("change",function(e){
+            let formDatos = new FormData($('#form_data')[0]);
+            formDatos.append("accion","carga_foto");
+            console.log(e);
+            console.log(formDatos);
+            $.ajax({
+                url:"includes/_funciones.php",
+                type:"POST",
+                data:formDatos,
+                contentType:false,
+                processData:false,
+                beforeSend:function(){
+                    let template = `<span>Subiendo imagen...</span>`;
+                    $('.box').html(template);
+                },
+                success:function(datos){
+                    let respuesta = JSON.parse(datos);
+                    console.log(JSON.parse(datos));
+                    if(respuesta.status==0){
+                        alert("No se cargó la imagen")
+                    }else{
+                        let template=`<img src="${respuesta.archivo}" class="img-fluid img-thumbnail" alt=""/>`;
+                        $('.box').html(template);
+                    }
+                },
+                error:function(){
+                    let template=`<span>Error, intente nuevamente.</span>`;
+                    $('.box').html(template);
+                }
+            });
+        });
+        //insertar header
         $("#guardar_datos").click(function() {
-            let nombre = $("#nombre").val();
-            let correo = $("#correo").val();
-            let telefono = $("#telefono").val();
-            let password = $("#password").val();
+            let file = $("#validatedCustomFile").val();
+            let title = $("#title").val();
+            let category = $("#category").val();
             let obj = {
-                "accion": "insertar_usuario",
-                "nombre": nombre,
-                "correo": correo,
-                "telefono": telefono,
-                "password": password
+                "accion": "insertar_category",
+                "file": file,
+                "title": title,
+                "category": category
             }
             $("#form_data").find("input").each(function() {
                 $(this).removeClass("has-error");
@@ -154,9 +187,10 @@
                     return false;
                 }
             });
+            checar_obj(obj);
             //boton change insertar to edit
             if ($(this).data("editar") == 1) {
-                obj["accion"] = "editar_usuario";
+                obj["accion"] = "editar_category";
                 obj["id"] = $(this).data('id');
             }
             $.post("includes/_funciones.php", obj, function(r) {
@@ -168,14 +202,14 @@
                 }
             });
         });
-        //eliminar usuario
-        $("#main").on("click", ".eliminar_usuario", function(e) {
+        //eliminar header
+        $("#main").on("click", ".eliminar_category", function(e) {
             e.preventDefault();
             let confirmacion = confirm('¿Desea eliminar este registro?');
             if (confirmacion) {
                 let id = $(this).data('id'),
                     obj = {
-                        "accion": "eliminar_usuario",
+                        "accion": "eliminar_category",
                         "id": id
                     };
                 $.post("includes/_funciones.php", obj, function(r) {
@@ -189,20 +223,19 @@
             }
         });
         //editar usuario
-        $("#list-usuarios").on("click", ".editar_registro", function(e) {
+        $("#list_post").on("click", ".editar_category", function(e) {
             let id = $(this).data('id'),
                 obj = {
-                    "accion": "consultar_usuario",
+                    "accion": "consultar_category",
                     "id": id
                 };
             $("#form_data")[0].reset();
             change_view("insert_data");
             $("#guardar_datos").text("Editar").data("editar", 1).data('id', id);
             $.post('includes/_funciones.php', obj, function(r) {
-                $("#nombre").val(r.nombre_usr);
-                $("#correo").val(r.correo_usr);
-                $("#telefono").val(r.telefono_usr);
-                $("#password").val(r.password_usr);
+                $("#file").val(r.post_file);
+                $("#title").val(r.post_text);
+                $("#category").val(r.post_category);
             }, "JSON");
             if (r == 0) {
                 $("#error").html("Error al editar").fadeIn();
@@ -229,6 +262,11 @@
             window.location.href = xd;
             });
         });
+        function checar_obj(objeto){
+            $.each(objeto,function(i,e){
+                console.log(i,e);
+            });
+        }
     </script>
 </body>
 

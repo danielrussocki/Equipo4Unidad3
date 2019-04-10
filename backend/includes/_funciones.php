@@ -1,18 +1,15 @@
-<?php
-
+<?php 
 include_once("_db.php");
-
 switch ($_POST["accion"]) {
 	case 'login':
 		login();
 		break;
 	case 'kill_session':
-		kill_session();
+        kill_session();
 		break;
 	case 'carga_foto':
 		carga_foto();
 		break;
-
 	case 'consultar_usuarios':
 		consultar_usuarios();
 		break;
@@ -28,7 +25,6 @@ switch ($_POST["accion"]) {
 	case 'eliminar_usuario':
 		eliminar_usuario($_POST['id']);
 		break;
-
 		//Works
 	case 'consultar_works':
 		consultar_works();
@@ -45,7 +41,6 @@ switch ($_POST["accion"]) {
 	case 'eliminar_work':
 		eliminar_work($_POST['id']);
 		break;
-
 		//TESTIMONIAL
 	case 'consultar_testimonials':
 		consultar_testimonials();
@@ -62,8 +57,7 @@ switch ($_POST["accion"]) {
 	case 'eliminar_testimonial':
 		eliminar_testimonial($_POST['id']);
 		break;
-
-		//CLIENTS
+		// CLIENTS
 	case 'consultar_clients':
 		consultar_clients();
 		break;
@@ -79,26 +73,102 @@ switch ($_POST["accion"]) {
 	case 'eliminar_client':
 		eliminar_client($_POST['id']);
 		break;
-
+		// CLIENT IMG
 	case 'consultar_clientimg':
 		consultar_clientimg();
 		break;
 	case 'eliminar_clientimg':
 		eliminar_clientimg($_POST['id']);
 		break;
-
 	case 'consultar_workimg':
 		consultar_workimg();
 		break;
 	case 'eliminar_workimg':
 		eliminar_workimg($_POST['id']);
 		break;
-
+		// HEADER
+    case 'consultar_headers':
+        consultar_headers();
+		break;
+	case 'consultar_header':
+		consultar_header($_POST['id']);
+		break;
+	case 'insertar_header':
+		insertar_header();
+		break;
+	case 'editar_header':
+		editar_header();
+		break;
+	case 'eliminar_header':
+		eliminar_header($_POST['id']);
+		break;
+	case 'consultar_footers':
+		consultar_footers();
+		break;
+	case 'insertar_footer':
+		insertar_footer();
+		break;
+	case 'consultar_footer':
+		consultar_footer($_POST['id']);
+		break;
+	case 'editar_footer':
+		editar_footer();
+		break;
+	case 'eliminar_footer':
+		eliminar_footer($_POST['id']);
+		break;
+	case 'form_contact':
+		form_contact();
+		break;
+	case 'consultar_categories':
+		consultar_categories();
+		break;
+	case 'consultar_category':
+		consultar_category($_POST['id']);
+		break;
+	case 'editar_category':
+		editar_category();
+		break;
+	case 'eliminar_category':
+		eliminar_category($_POST['id']);
+		break;
+	case 'insertar_category':
+		insertar_category();
+		break;
+	case 'consultar_contacts':
+		consultar_contacts();
+		break;
+	case 'consultar_contact':
+		consultar_contact($_POST['id']);
+		break;
+	case 'insertar_contact':
+		insertar_contact();
+		break;
+	case 'editar_contact':
+		editar_contact();
+		break;
+	case 'eliminar_contact':
+		eliminar_contact($_POST['id']);
+		break;
+	case 'consultar_form_contacts':
+		consultar_form_contacts();
+		break;
+	case 'consultar_form_contact':
+		consultar_form_contact($_POST['id']);
+		break;
+	case 'insertar_form_contact':
+		insertar_form_contact();
+		break;
+	case 'editar_form_contact':
+		editar_form_contact();
+		break;
+	case 'eliminar_form_contact':
+		eliminar_form_contact($_POST['id']);
+		break;
 	default:
 		break;
 }
-function carga_foto()
-{
+function carga_foto(){
 	if (isset($_FILES["foto"])) {
 		$file = $_FILES["foto"];
 		$nombre = $_FILES["foto"]["name"];
@@ -107,17 +177,16 @@ function carga_foto()
 		$tam = $_FILES["foto"]["size"];
 		$dir = "../img/upload/";
 		$respuesta = [
-			"archivo" => "/img/team4-logo.png",
+			"archivo" => "img/logo.png",
 			"status" => 0
 		];
-		if (move_uploaded_file($temporal, $dir . $nombre)) {
-			$respuesta["archivo"] = "img/upload/" . $nombre;
+		if(move_uploaded_file($temporal, $dir.$nombre)){
+			$respuesta["archivo"] = "img/upload/".$nombre;
 			$respuesta["status"] = 1;
 		}
 		echo json_encode($respuesta);
 	}
 }
-
 function login()
 {
 	global $mysqli;
@@ -150,7 +219,13 @@ function login()
 		}
 	}
 }
-
+function kill_session(){
+    session_start();
+	error_reporting(0);
+	session_destroy();
+	echo "index.php";
+}
+// USUARIOS
 function consultar_usuarios()
 {
 	global $mysqli;
@@ -162,7 +237,6 @@ function consultar_usuarios()
 	}
 	echo json_encode($arreglo); //Imprime el JSON ENCODEADO
 }
-
 function insertar_usuario()
 {
 	global $mysqli;
@@ -186,7 +260,6 @@ function insertar_usuario()
 		echo "1";
 	}
 }
-
 function eliminar_usuario($id)
 {
 	global $mysqli;
@@ -198,7 +271,6 @@ function eliminar_usuario($id)
 		echo "0";
 	}
 }
-
 function consultar_usuario($id)
 {
 	global $mysqli;
@@ -220,16 +292,7 @@ function editar_usuario()
 		echo "0";
 	}
 }
-
-function kill_session()
-{
-	session_start();
-	error_reporting(0);
-	session_destroy();
-	echo "index.html";
-}
 //WORKS PART
-
 function consultar_works()
 {
 	global $mysqli;
@@ -241,50 +304,40 @@ function consultar_works()
 	}
 	echo json_encode($arreglo); //Imprime el JSON ENCODEADO
 }
-
 function consultar_work($id)
 {
 	global $mysqli;
-	$query = "SELECT * FROM works WHERE works_id = $id";
+	$query = "SELECT * FROM works WHERE id = $id";
 	$res = $mysqli->query($query);
 	$fila = mysqli_fetch_array($res);
 	echo json_encode($fila); //Imprime Json encodeado	
 }
-
 function insertar_work()
-{
+{  
 	global $mysqli;
-	$titulo = $_POST["titulo"];
-	$descripcion = $_POST["descripcion"];
-	$tab1 = $_POST["tab1"];
-	$tab2 = $_POST["tab2"];
-	$tab3 = $_POST["tab3"];
-
-	if (empty($titulo) && empty($descripcion) && empty($tab1) && empty($tab2) && empty($tab3)) {
+	$work_name = $_POST["work_name"];
+	$work_description = $_POST["work_description"];
+	$work_img = $_POST["work_img"];
+	if (empty($work_name) && empty($work_description) && empty($work_img)) {
 		echo "0";
-	} elseif (empty($titulo)) {
+	} elseif (empty($work_name)) {
 		echo "0";
-	} elseif (empty($descripcion)) {
+	} elseif (empty($work_description)) {
 		echo "0";
-	} elseif (empty($tab1)) {
-		echo "0";
-	} elseif (empty($tab2)) {
-		echo "0";
-	} elseif (empty($tab3)) {
+	} elseif (empty($work_img)) {
 		echo "0";
 	} else {
-		$query = "INSERT INTO works VALUES ('','$titulo','$descripcion','$tab1', '$tab2', '$tab3')";
+		$query = "INSERT INTO works VALUES ('','$work_name','$work_description','$work_img')";
 		$res = mysqli_query($mysqli, $query);
 		echo "1";
 	}
 }
-
 function editar_work()
 {
 	global $mysqli;
 	extract($_POST);
-	$query = "UPDATE works SET works_title = '$titulo', works_description = '$descripcion', works_tab1 = '$tab1', works_tab2 = '$tab2', works_tab3 = '$tab3'
-	WHERE works_id = '$id'";
+	$query = "UPDATE works SET work_name = '$work_name', work_description = '$work_description', work_img = '$work_img'
+	WHERE id = '$id'";
 	$res = $mysqli->query($query);
 	if ($res) {
 		echo "1";
@@ -292,11 +345,10 @@ function editar_work()
 		echo "0";
 	}
 }
-
 function eliminar_work($id)
 {
 	global $mysqli;
-	$query = "DELETE FROM works WHERE works_id = $id";
+	$query = "DELETE FROM works WHERE id = $id";
 	$res = $mysqli->query($query);
 	if ($res) {
 		echo "1";
@@ -304,10 +356,7 @@ function eliminar_work($id)
 		echo "0";
 	}
 }
-
-
-//TESTIMONIAL
-
+//TESTIMONIAL PART
 function consultar_testimonials()
 {
 	global $mysqli;
@@ -319,50 +368,47 @@ function consultar_testimonials()
 	}
 	echo json_encode($arreglo); //Imprime el JSON ENCODEADO
 }
-
 function consultar_testimonial($id)
 {
 	global $mysqli;
-	$query = "SELECT * FROM testimonials WHERE test_id = $id";
+	$query = "SELECT * FROM testimonials WHERE id = $id";
 	$res = $mysqli->query($query);
 	$fila = mysqli_fetch_array($res);
 	echo json_encode($fila); //Imprime Json encodeado	
 }
-
 function insertar_testimonial()
-{
+{  
 	global $mysqli;
 	$description = $_POST["description"];
 	$quote = $_POST["quote"];
-	$logo = $_POST["ruta"];
+	$img = $_POST["img"];
 	$name = $_POST["name"];
 	$puesto = $_POST["puesto"];
-
-	if (empty($description) && empty($quote) && empty($logo) && empty($name)  && empty($puesto)) {
+	
+	if (empty($description) && empty($quote) && empty($img) && empty($name)  && empty($puesto)) {
 		echo "0";
 	} elseif (empty($description)) {
 		echo "0";
 	} elseif (empty($quote)) {
 		echo "0";
-	} elseif (empty($logo)) {
+	} elseif (empty($img)) {
 		echo "0";
 	} elseif (empty($name)) {
 		echo "0";
 	} elseif (empty($puesto)) {
 		echo "0";
 	} else {
-		$query = "INSERT INTO testimonials VALUES ('','$description','$quote','$logo', '$name', '$puesto')";
+		$query = "INSERT INTO testimonials VALUES ('','$description','$quote','$img', '$name', '$puesto')";
 		$res = mysqli_query($mysqli, $query);
 		echo "1";
 	}
 }
-
 function editar_testimonial()
 {
 	global $mysqli;
 	extract($_POST);
-	$query = "UPDATE testimonials SET test_description = '$description', test_quote = '$quote', test_img = '$ruta', test_name = '$name', test_puesto = '$puesto'
-	WHERE test_id = '$id'";
+	$query = "UPDATE testimonials SET description = '$description', quote = '$quote', img = '$img', name = '$name', puesto = '$puesto'
+	WHERE id = '$id'";
 	$res = $mysqli->query($query);
 	if ($res) {
 		echo "1";
@@ -370,11 +416,10 @@ function editar_testimonial()
 		echo "0";
 	}
 }
-
 function eliminar_testimonial($id)
 {
 	global $mysqli;
-	$query = "DELETE FROM testimonials WHERE test_id = $id";
+	$query = "DELETE FROM testimonials WHERE id = $id";
 	$res = $mysqli->query($query);
 	if ($res) {
 		echo "1";
@@ -382,8 +427,7 @@ function eliminar_testimonial($id)
 		echo "0";
 	}
 }
-
-//CLIENTS
+// CLIENTS
 function consultar_clients()
 {
 	global $mysqli;
@@ -448,9 +492,7 @@ function eliminar_client($id)
 		echo "0";
 	}
 }
-
-
-////
+// IMG-CLIENT
 function consultar_clientimg()
 {
 	global $mysqli;
@@ -498,3 +540,258 @@ function eliminar_workimg($id)
 		echo "0";
 	}
 }
+// HEADER
+function consultar_headers(){
+    global $mysqli;
+    $query = "SELECT * FROM header";
+    $respuesta = mysqli_query($mysqli, $query);
+    $arreglo = [];
+    while ($fila = mysqli_fetch_array($respuesta)) {        
+        array_push($arreglo, $fila);
+    }
+	echo json_encode($arreglo);
+}
+function consultar_header($id){
+	global $mysqli;
+	$query = "SELECT * FROM header WHERE header_id = '$id'";
+	$respuesta = $mysqli->query($query);
+	$fila = mysqli_fetch_array($respuesta);
+	echo json_encode($fila);
+}
+function insertar_header(){
+    global $mysqli;
+    $title=$_POST['title'];$text_btn=$_POST['text_btn'];
+	$header_href=$_POST['header_href'];$file=$_POST['file'];
+	$ruta = "img/upload/";
+	$info = pathinfo($file);
+	$file_name = $ruta.$info['basename'];
+    $query = "INSERT INTO header VALUES('','$file_name','$title','$text_btn','$header_href')";
+	$mysqli->query($query);
+	if(empty($title)||empty($header_href)||empty($text_btn)||empty($file)){
+		echo "0";
+	} else {
+		echo "1";
+	}
+}
+function editar_header(){
+	global $mysqli;
+	extract($_POST);
+	$ruta = "img/upload/";
+	$info = pathinfo($file);
+	$file_name = $ruta.$info['basename'];
+	$query = "UPDATE header SET header_background = '$file_name', header_title = '$title', header_button = '$text_btn', header_href = '$header_href' WHERE header_id = $id";
+	$respuesta = $mysqli->query($query);
+	if($respuesta){
+		echo "1";
+	} else {
+		echo "0";
+	}
+}
+function eliminar_header($id){
+	global $mysqli;
+	$query = "DELETE FROM header WHERE header_id = '$id'";
+	$respuesta = $mysqli->query($query);
+	if($respuesta){
+		echo "1";
+	}else{
+		echo "0";
+	}
+}
+function consultar_footers(){
+	global $mysqli;
+	$query = "SELECT * FROM aboutUs";
+	$respuesta = $mysqli->query($query);
+	$arreglo = [];
+	while($fila=mysqli_fetch_array($respuesta)){
+		array_push($arreglo,$fila);
+	}
+	echo json_encode($arreglo);
+}
+function insertar_footer(){
+	global $mysqli;
+	$footer_content = $_POST['footer_content'];
+	$query = "INSERT INTO aboutUs VALUES('','$footer_content',0)";	
+	if(empty($footer_content)){
+		echo "0";
+	} else {
+		$mysqli->query($query);
+		echo "1";
+	}
+}
+function consultar_footer($id){
+	global $mysqli;
+	$query = "SELECT * FROM aboutUs WHERE footer_id = '$id'";
+	$respuesta = $mysqli->query($query);
+	$fila = mysqli_fetch_array($respuesta);
+	echo json_encode($fila);
+}
+function editar_footer(){
+	global $mysqli;
+	extract($_POST);
+	$query = "UPDATE aboutUs SET footer_content = '$footer_content' WHERE footer_id = '$id'";
+	$respuesta = $mysqli->query($query);
+	if($respuesta){
+		echo "1";
+	} else {
+		echo "0";
+	}
+}
+function eliminar_footer($id){
+	global $mysqli;
+	$query = "DELETE FROM aboutUs WHERE footer_id = '$id'";
+	$respuesta = $mysqli->query($query);
+	if($respuesta){
+		echo "1";
+	}else{
+		echo "0";
+	}
+}
+function form_contact(){
+	global $mysqli;
+	extract($_POST);
+	$query = "INSERT INTO contactForm VALUES('','$form_name','$form_email','$form_message')";
+	if(empty($form_name)||empty($form_email)||empty($form_message)){
+		echo "0";
+	}else{
+		$mysqli->query($query);
+		echo "1";
+	}
+}
+function consultar_categories(){
+	global $mysqli;
+	$query = "SELECT * FROM recentPosts";
+	$respuesta = $mysqli->query($query);
+	$arreglo = [];
+	while($fila = mysqli_fetch_array($respuesta)){
+		array_push($arreglo,$fila);
+	}
+	echo json_encode($arreglo);
+}
+function consultar_category($id){
+	global $mysqli;
+	$query = "SELECT * FROM recentPosts WHERE post_id = $id";
+	$respuesta = $mysqli->query($query);
+	$fila = mysqli_fetch_array($respuesta);
+	echo json_encode($fila);
+}
+function insertar_category(){
+	global $mysqli;
+	extract($_POST);
+	$ruta = "img/upload/";
+	$info = pathinfo($file);
+	$file_name = $ruta.$info['basename'];
+	$query = "INSERT INTO recentPosts VALUES('','$file_name','$title','$category')";
+	if(empty($file)||empty($title)||empty($category)){
+		echo "0";
+	}else{
+		$mysqli->query($query);
+		echo "1";
+	}
+}
+function eliminar_category($id){
+	global $mysqli;
+	$query = "DELETE FROM recentPosts WHERE post_id = $id";
+	$respuesta = $mysqli->query($query);
+	if($respuesta){
+		echo "1";
+	}else{
+		echo "0";
+	}
+}
+function editar_category(){
+	global $mysqli;
+	extract($_POST);
+	$ruta = "img/upload/";
+	$info = pathinfo($file);
+	$file_name = $ruta.$info['basename'];
+	$query = "UPDATE recentPosts SET post_file = '$file_name', post_text = '$title', post_category = '$category' WHERE post_id = $id";
+	$respuesta = $mysqli->query($query);
+	if($respuesta){
+		echo "1";
+	} else {
+		echo "0";
+	}
+}
+function consultar_contacts(){
+	global $mysqli;
+	$query = "SELECT * FROM contactUs";
+	$respuesta = $mysqli->query($query);
+	$arreglo = [];
+	while($fila = mysqli_fetch_array($respuesta)){
+		array_push($arreglo,$fila);
+	}
+	echo json_encode($arreglo);
+}
+function consultar_contact($id){
+	global $mysqli;
+	$query = "SELECT * FROM contactUs WHERE contact_id = $id";
+	$respuesta = $mysqli->query($query);
+	$fila = mysqli_fetch_array($respuesta);
+	echo json_encode($fila);
+}
+function insertar_contact(){
+	global $mysqli;
+	extract($_POST);
+	$query = "INSERT INTO contactUs VALUES('','$address','$location','$email','$phone','$fax')";
+	if(empty($address)||empty($location)||empty($email)||empty($phone)||empty($fax)){
+		echo "0";
+	}else{
+		$mysqli->query($query);
+		echo "1";
+	}
+}
+function editar_contact(){
+	global $mysqli;
+	extract($_POST);
+	$query = "UPDATE contactUs SET contact_address = '$address', contact_location = '$location', contact_email = '$email', contact_phone = '$phone', contact_fax = '$fax' WHERE contact_id = $id";
+	$respuesta = $mysqli->query($query);
+	if($respuesta){
+		echo "1";
+	}else{
+		echo "0";
+	}
+}
+function eliminar_contact($id){
+	global $mysqli;
+	$query = "DELETE FROM contactUs WHERE contact_id = $id";
+	$respuesta = $mysqli->query($query);
+	if($respuesta){
+		echo "1";
+	}else{
+		echo "0";
+	}
+}
+function consultar_form_contacts(){
+	global $mysqli;
+	$query = "SELECT * FROM contactForm";
+	$respuesta = $mysqli->query($query);
+	$arreglo = [];
+	while($fila = mysqli_fetch_array($respuesta)){
+		array_push($arreglo,$fila);
+	}
+	echo json_encode($arreglo);
+}
+function consultar_form_contact($id){
+	global $mysqli;
+	$query = "SELECT * FROM contactForm WHERE form_id = $id";
+	$respuesta = $mysqli->query($query);
+	$fila = mysqli_fetch_array($respuesta);
+	echo json_encode($fila);
+}
+function insertar_form_contact(){
+
+}
+function editar_form_contact(){
+	
+}
+function eliminar_form_contact($id){
+	global $mysqli;
+	$query = "DELETE FROM contactForm WHERE form_id = $id";
+	$respuesta = $mysqli->query($query);
+	if($respuesta){
+		echo "1";
+	}else{
+		echo "0";
+	}
+}
+?>
