@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Footer</title>
+    <title>Contact us</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
@@ -30,16 +30,20 @@
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
                             <button type="button" class="btn btn-sm btn-outline-danger cancelar">Cancelar</button>
-                            <button type="button" class="btn btn-sm btn-outline-success" id="nuevo_footer">Nuevo</button>
+                            <button type="button" class="btn btn-sm btn-outline-success" id="nuevo_contact">Nuevo</button>
                         </div>
                     </div>
                 </div>
-                <h2>Footer</h2>
+                <h2>Contact us</h2>
                 <div class="table-responsive view" id="show_data">
-                    <table class="table table-striped table-sm" id="list_footer">
+                    <table class="table table-striped table-sm" id="list_contact">
                         <thead>
                             <tr>
-                                <th>Title</th>
+                                <th>Address</th>
+                                <th>Location</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Fax</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -51,7 +55,29 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <textarea class="form-control" id="title" rows="3"></textarea>
+                                    <input type="text" id="address" name="address" class="form-control" placeholder="Dirección">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input type="text" id="location" name="location" class="form-control" placeholder="Ubicación">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <input type="text" id="email" name="email" class="form-control" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="Teléfono">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input type="text" id="fax" name="fax" class="form-control" placeholder="Fax">
                                 </div>
                             </div>
                         </div>
@@ -88,7 +114,7 @@
         }
         function consultar() {
             let obj = {
-                "accion": "consultar_footers"
+                "accion": "consultar_contacts"
             };
             checar_obj(obj);
             $.post("includes/_funciones.php", obj, function(respuesta) {
@@ -98,15 +124,19 @@
                     template +=
                         `
           <tr>
-          <td>${e.footer_content}</td>
+          <td>${e.contact_address}</td>
+          <td>${e.contact_location}</td>
+          <td>${e.contact_email}</td>
+          <td>${e.contact_phone}</td>
+          <td>${e.contact_fax}</td>
           <td>
-          <a href="#" data-id="${e.footer_id}" class="editar_footer">Editar</a>
-          <a href="#" data-id="${e.footer_id}" class="eliminar_footer">Eliminar</a>
+          <a href="#" data-id="${e.contact_id}" class="editar_contact">Editar</a>
+          <a href="#" data-id="${e.contact_id}" class="eliminar_contact">Eliminar</a>
           </td>
           </tr>
           `;
                 });
-                $("#list_footer tbody").html(template);
+                $("#list_contact tbody").html(template);
             }, "JSON");
         }
         $(document).ready(function() {
@@ -114,16 +144,24 @@
             change_view();
         });
         //form change
-        $("#nuevo_footer").click(function() {
+        $("#nuevo_contact").click(function() {
             change_view('insert_data');
-        });        
+        });
         //insertar header
         $("#guardar_datos").click(function() {
-            let title = $("#title").val();
+            let address = $("#address").val();
+            let location = $("#location").val();
+            let email = $("#email").val();
+            let phone = $("#phone").val();
+            let fax = $("#fax").val();
             let obj = {
-                "accion": "insertar_footer",
-                "footer_content": title
-            }
+                "accion": "insertar_contact",
+                "address": address,
+                "location": location,
+                "email": email,
+                "phone":phone,
+                "fax":fax
+            };
             $("#form_data").find("input").each(function() {
                 $(this).removeClass("has-error");
                 if ($(this).val() != "") {
@@ -136,7 +174,7 @@
             checar_obj(obj);
             //boton change insertar to edit
             if ($(this).data("editar") == 1) {
-                obj["accion"] = "editar_footer";
+                obj["accion"] = "editar_contact";
                 obj["id"] = $(this).data('id');
             }
             $.post("includes/_funciones.php", obj, function(r) {
@@ -149,13 +187,13 @@
             });
         });
         //eliminar header
-        $("#main").on("click", ".eliminar_footer", function(e) {
+        $("#main").on("click", ".eliminar_contact", function(e) {
             e.preventDefault();
             let confirmacion = confirm('¿Desea eliminar este registro?');
             if (confirmacion) {
                 let id = $(this).data('id'),
                     obj = {
-                        "accion": "eliminar_footer",
+                        "accion": "eliminar_contact",
                         "id": id
                     };
                 $.post("includes/_funciones.php", obj, function(r) {
@@ -169,23 +207,27 @@
             }
         });
         //editar usuario
-        $("#list_footer").on("click", ".editar_footer", function(e) {
+        $("#list_contact").on("click", ".editar_contact", function(e) {
             let id = $(this).data('id'),
                 obj = {
-                    "accion": "consultar_footer",
+                    "accion": "consultar_contact",
                     "id": id
                 };
             $("#form_data")[0].reset();
             change_view("insert_data");
             $("#guardar_datos").text("Editar").data("editar", 1).data('id', id);
             $.post('includes/_funciones.php', obj, function(r) {
-                $("#title").val(r.footer_content);
+                $("#address").val(r.contact_address);
+                $("#location").val(r.contact_location);
+                $("#email").val(r.contact_email);
+                $("#phone").val(r.contact_phone);
+                $("#fax").val(r.contact_fax);
             }, "JSON");
             if (r == 0) {
                 $("#error").html("Error al editar").fadeIn();
             }
             if (r == 1) {
-                location.reload();
+                window.location.reload(true);
             }
         });
         //cancel button

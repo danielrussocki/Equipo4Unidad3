@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Footer</title>
+    <title>Categories</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
@@ -30,16 +30,18 @@
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
                             <button type="button" class="btn btn-sm btn-outline-danger cancelar">Cancelar</button>
-                            <button type="button" class="btn btn-sm btn-outline-success" id="nuevo_footer">Nuevo</button>
+                            <button type="button" class="btn btn-sm btn-outline-success" id="nuevo_header">Nuevo</button>
                         </div>
                     </div>
                 </div>
-                <h2>Footer</h2>
+                <h2>Categories</h2>
                 <div class="table-responsive view" id="show_data">
-                    <table class="table table-striped table-sm" id="list_footer">
+                    <table class="table table-striped table-sm" id="list_post">
                         <thead>
                             <tr>
-                                <th>Title</th>
+                                <th>Category</th>
+                                <th>File</th>
+                                <th>Text</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -47,11 +49,25 @@
                     </table>
                 </div>
                 <div id="insert_data" class="view">
-                    <form id="form_data">
+                    <form id="form_data" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="validatedCustomFile" name="foto" required>
+                                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <input type="text" id="title" name="title" class="form-control" placeholder="Título">
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <textarea class="form-control" id="title" rows="3"></textarea>
+                                    <input type="text" id="category" name="category" class="form-control" placeholder="Botón">
                                 </div>
                             </div>
                         </div>
@@ -88,7 +104,7 @@
         }
         function consultar() {
             let obj = {
-                "accion": "consultar_footers"
+                "accion": "consultar_categories"
             };
             checar_obj(obj);
             $.post("includes/_funciones.php", obj, function(respuesta) {
@@ -98,15 +114,17 @@
                     template +=
                         `
           <tr>
-          <td>${e.footer_content}</td>
+          <td>${e.post_category}</td>
+          <td>${e.post_file}</td>
+          <td>${e.post_text}</td>
           <td>
-          <a href="#" data-id="${e.footer_id}" class="editar_footer">Editar</a>
-          <a href="#" data-id="${e.footer_id}" class="eliminar_footer">Eliminar</a>
+          <a href="#" data-id="${e.post_id}" class="editar_category">Editar</a>
+          <a href="#" data-id="${e.post_id}" class="eliminar_category">Eliminar</a>
           </td>
           </tr>
           `;
                 });
-                $("#list_footer tbody").html(template);
+                $("#list_post tbody").html(template);
             }, "JSON");
         }
         $(document).ready(function() {
@@ -114,15 +132,51 @@
             change_view();
         });
         //form change
-        $("#nuevo_footer").click(function() {
+        $("#nuevo_header").click(function() {
             change_view('insert_data');
-        });        
+        });
+        //Foto
+        $('#validatedCustomFile').on("change",function(e){
+            let formDatos = new FormData($('#form_data')[0]);
+            formDatos.append("accion","carga_foto");
+            console.log(e);
+            console.log(formDatos);
+            $.ajax({
+                url:"includes/_funciones.php",
+                type:"POST",
+                data:formDatos,
+                contentType:false,
+                processData:false,
+                beforeSend:function(){
+                    let template = `<span>Subiendo imagen...</span>`;
+                    $('.box').html(template);
+                },
+                success:function(datos){
+                    let respuesta = JSON.parse(datos);
+                    console.log(JSON.parse(datos));
+                    if(respuesta.status==0){
+                        alert("No se cargó la imagen")
+                    }else{
+                        let template=`<img src="${respuesta.archivo}" class="img-fluid img-thumbnail" alt=""/>`;
+                        $('.box').html(template);
+                    }
+                },
+                error:function(){
+                    let template=`<span>Error, intente nuevamente.</span>`;
+                    $('.box').html(template);
+                }
+            });
+        });
         //insertar header
         $("#guardar_datos").click(function() {
+            let file = $("#validatedCustomFile").val();
             let title = $("#title").val();
+            let category = $("#category").val();
             let obj = {
-                "accion": "insertar_footer",
-                "footer_content": title
+                "accion": "insertar_category",
+                "file": file,
+                "title": title,
+                "category": category
             }
             $("#form_data").find("input").each(function() {
                 $(this).removeClass("has-error");
@@ -136,7 +190,7 @@
             checar_obj(obj);
             //boton change insertar to edit
             if ($(this).data("editar") == 1) {
-                obj["accion"] = "editar_footer";
+                obj["accion"] = "editar_category";
                 obj["id"] = $(this).data('id');
             }
             $.post("includes/_funciones.php", obj, function(r) {
@@ -149,13 +203,13 @@
             });
         });
         //eliminar header
-        $("#main").on("click", ".eliminar_footer", function(e) {
+        $("#main").on("click", ".eliminar_category", function(e) {
             e.preventDefault();
             let confirmacion = confirm('¿Desea eliminar este registro?');
             if (confirmacion) {
                 let id = $(this).data('id'),
                     obj = {
-                        "accion": "eliminar_footer",
+                        "accion": "eliminar_category",
                         "id": id
                     };
                 $.post("includes/_funciones.php", obj, function(r) {
@@ -169,17 +223,19 @@
             }
         });
         //editar usuario
-        $("#list_footer").on("click", ".editar_footer", function(e) {
+        $("#list_post").on("click", ".editar_category", function(e) {
             let id = $(this).data('id'),
                 obj = {
-                    "accion": "consultar_footer",
+                    "accion": "consultar_category",
                     "id": id
                 };
             $("#form_data")[0].reset();
             change_view("insert_data");
             $("#guardar_datos").text("Editar").data("editar", 1).data('id', id);
             $.post('includes/_funciones.php', obj, function(r) {
-                $("#title").val(r.footer_content);
+                $("#file").val(r.post_file);
+                $("#title").val(r.post_text);
+                $("#category").val(r.post_category);
             }, "JSON");
             if (r == 0) {
                 $("#error").html("Error al editar").fadeIn();
