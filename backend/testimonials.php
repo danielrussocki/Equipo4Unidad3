@@ -285,6 +285,6 @@ if (isset($varsesion)) {
     </html>
 <?php
 } else {
-    header("Location:index.html");
+    header("Location:index.php");
 }
 ?>

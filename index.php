@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="css/lightslider.css">
     <link rel="stylesheet" href="css/jquery-multitabs.css">
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 </head>
 
@@ -74,16 +73,28 @@
         </div>
     </section>
     <!--OUR LATEST WORKS-->
+    <?php
+    include_once("backend/includes/_db.php");
+    $query = "SELECT * FROM works ORDER BY rand() LIMIT 1";
+    $res = mysqli_query($mysqli, $query) or die(mysql_error());
+    $work1 = mysqli_fetch_assoc($res);
+    $query = "SELECT * FROM works ORDER BY rand() LIMIT 1";
+    $res = mysqli_query($mysqli, $query) or die(mysql_error());
+    $work2 = mysqli_fetch_assoc($res);
+    $query = "SELECT * FROM works ORDER BY rand() LIMIT 1";
+    $res = mysqli_query($mysqli, $query) or die(mysql_error());
+    $work3 = mysqli_fetch_assoc($res);
+    ?>
     <div class="section-our-latest-works">
         <div class="container container-centered">
-            <h2 class="section-title-green">Our latest work</h2>
+            <h2 class="section-title-green"><?php echo $work1['works_title']; ?></h2>
             <!-- <hr class="line"> -->
-            <p class="section-description-green">Lorem ipsum dolor sit amet. Proin gravida nibh vel velit auctor aliquet.</p>
+            <p class="section-description-green"><?php echo $work1['works_description']; ?></p>
             <div class="tab2">
                 <div data-child="false" class="tab__header">
-                    <div class="tab__header-1 tab__header--active">Photography</div>
-                    <div class="tab__header-2">Design</div>
-                    <div class="tab__header-3">Print</div>
+                    <div class="tab__header-1 tab__header--active"><?php echo $work1['works_tab1']; ?></div>
+                    <div class="tab__header-2"><?php echo $work1['works_tab2']; ?></div>
+                    <div class="tab__header-3"><?php echo $work2['works_tab3']; ?></div>
                 </div>
 
                 <div class=" tab__content">
@@ -131,68 +142,54 @@
     <!---------------------->
 
     <!---TESTIMONIALS-->
-
+    <?php
+    include_once("backend/includes/_db.php");
+    $query = "SELECT * FROM testimonials ORDER BY rand() LIMIT 1";
+    $res = mysqli_query($mysqli, $query) or die(mysql_error());
+    $one = mysqli_fetch_assoc($res);
+    $query = "SELECT * FROM testimonials ORDER BY rand() LIMIT 1";
+    $res = mysqli_query($mysqli, $query) or die(mysql_error());
+    $two = mysqli_fetch_assoc($res);
+    $query = "SELECT * FROM testimonials ORDER BY rand() LIMIT 1";
+    $res = mysqli_query($mysqli, $query) or die(mysql_error());
+    $tre = mysqli_fetch_assoc($res);
+    ?>
     <div class="lSSlideOuter section-testimonials" id="testimonials">
         <div class="lSSlideWrapper usingCss container container-centered">
             <h2 class="section-title">Testimonials</h2>
-            <ul id="responsive" class="gallery content-slider list-unstyled clearfix lightSlider lsGrab lSSlide"
-                style="width: 2463.33px; height: 165px; padding-bottom: 0%; transform: translate3d(0px, 0px, 0px);">
+            <p class="section-description"><?php echo $one['test_description']; ?></p>
+
+            <ul id="responsive" class="gallery content-slider list-unstyled clearfix lightSlider lsGrab lSSlide" style="width: 2463.33px; height: 165px; padding-bottom: 0%; transform: translate3d(0px, 0px, 0px);">
                 <li class="lslide active" style="width: 240.333px; margin-right: 6px;">
                     <!-- <hr class="line"> -->
-                    <p class="section-description">Lorem ipsum dolor sit amet. Proin gravida nibh vel velit auctor
-                        aliquet.</p>
 
-                    <p class="testimonials-quotes">“Awalnya saya tidak menderita penyakit apapun,</br>
-                        namun setelah saya tidak berobat ke klinik tongfang, saya dinyatakan</br>
-                        tidak menderita penyakit apapun!”</p>
+                    <p class="testimonials-quotes"><?php echo $one['test_quote']; ?></p>
 
                     <div class="testimonials-client">
-                        <img src="img/Herp.png" alt="Herp">
-                        <p class="testimonials-client-name">Mr. Herp</p>
-                        <p class="testimonials-client-company">CEO of Meme, Inc.</p>
+                        <img src="backend/<?php echo $one['test_img']; ?>" alt="Herp">
+                        <p class="testimonials-client-name"><?php echo $one['test_name']; ?></p>
+                        <p class="testimonials-client-company"><?php echo $one['test_puesto']; ?></p>
 
                 </li>
                 <li class="lslide" style="width: 240.333px; margin-right: 6px;">
                     <!-- <hr class="line"> -->
-                    <p class="section-description">Lorem ipsum dolor sit amet. Proin gravida nibh vel velit auctor
-                        aliquet.</p>
 
-                    <p class="testimonials-quotes">“Awalnya saya tidak menderita penyakit apapun,</br>
-                        namun setelah saya tidak berobat ke klinik tongfang, saya dinyatakan</br>
-                        tidak menderita penyakit apapun!”</p>
+                    <p class="testimonials-quotes"><?php echo $two['test_quote']; ?></p>
 
                     <div class="testimonials-client">
-                        <img src="img/Herp.png" alt="Herp">
-                        <p class="testimonials-client-name">Mr. Herp</p>
-                        <p class="testimonials-client-company">CEO of Meme, Inc.</p>
+                        <img src="backend/<?php echo $two['test_img']; ?>" alt="Herp">
+                        <p class="testimonials-client-name"><?php echo $two['test_name']; ?></p>
+                        <p class="testimonials-client-company"><?php echo $two['test_puesto']; ?></p>
                 </li>
                 <li class="lslide" style="width: 240.333px; margin-right: 6px;">
                     <!-- <hr class="line"> -->
-                    <p class="section-description">Lorem ipsum dolor sit amet. Proin gravida nibh vel velit auctor
-                        aliquet.</p>
 
-                    <p class="testimonials-quotes">“Awalnya saya tidak menderita penyakit apapun,</br>
-                        namun setelah saya tidak berobat ke klinik tongfang, saya dinyatakan</br>
-                        tidak menderita penyakit apapun!”</p>
+                    <p class="testimonials-quotes"><?php echo $tre['test_quote']; ?></p>
 
                     <div class="testimonials-client">
-                        <img src="img/Herp.png" alt="Herp">
-                        <p class="testimonials-client-name">Mr. Herp</p>
-                        <p class="testimonials-client-company">CEO of Meme, Inc.</p>
-                </li>
-                <li class="lslide" style="width: 240.333px; margin-right: 6px;">
-                    <!-- <hr class="line"> -->
-                    <p class="section-description">Lorem ipsum dolor sit amet. Proin gravida nibh vel velit auctor
-                        aliquet.</p>
-
-                    <p class="testimonials-quotes">“Awalnya saya tidak menderita penyakit apapun,</br>
-                        namun setelah saya tidak berobat ke klinik tongfang, saya dinyatakan</br>
-                        tidak menderita penyakit apapun!”</p>
-
-                    <div class="testimonials-client">
-                        <img src="img/Herp.png" alt="Herp">
-                        <p class="testimonials-client-name">Mr. Herp</p>
-                        <p class="testimonials-client-company">CEO of Meme, Inc.</p>
+                        <img src="backend/<?php echo $tre['test_img']; ?>" alt="Herp">
+                        <p class="testimonials-client-name"><?php echo $tre['test_name']; ?></p>
+                        <p class="testimonials-client-company"><?php echo $tre['test_puesto']; ?></p>
                 </li>
             </ul>
         </div>
@@ -200,59 +197,57 @@
     <!-------------------------->
 
     <!--HAAPPY CLIENTS-->
+    <?php
+    include_once("backend/includes/_db.php");
+    $query = "SELECT * FROM clients ORDER BY rand() LIMIT 1";
+    $res = mysqli_query($mysqli, $query) or die(mysql_error());
+    $one = mysqli_fetch_assoc($res);
+    ?>
     <div class="section-happy-clients" id="happyClients">
         <div class="container container-centered">
-            <h2 class="section-title">Our happy client</h2>
+            <h2 class="section-title"><?php echo $one['client_title']; ?></h2>
             <!-- <hr class="line"> -->
-            <p class="section-description">Lorem ipsum dolor sit amet. Proin gravida nibh vel velit auctor aliquet.</p>
+            <p class="section-description"><?php echo $one['client_description']; ?></p>
         </div>
+
         <div class="happy-clients-images">
-            <div class="happy-clients-wrap">
-                <img src="img/logo-clients/Google-logo.png" alt="Google">
-            </div>
-            <div class="happy-clients-wrap">
-                <img src="img/logo-clients/Yahoo_Logo.png" alt="Yahoo">
-            </div>
-            <div class="happy-clients-wrap">
-                <img src="img/logo-clients/MSFT_logo.png" alt="Microsoft">
-            </div>
-            <div class="happy-clients-wrap">
-                <img src="img/logo-clients/Intel-logo.png" alt="Intel">
-            </div>
-            <div class="happy-clients-wrap">
-                <img src="img/logo-clients/qualcomm-logo.png" alt="Qualcomm">
-            </div>
-            <div class="happy-clients-wrap">
-                <img src="img/logo-clients/cisco-logo.png" alt="Cisco">
-            </div>
-            <div class="happy-clients-wrap">
-                <img src="img/logo-clients/Apple-logo.png" alt="Apple">
-            </div>
-            <div class="happy-clients-wrap">
-                <img src="img/logo-clients/ASUS_Logo.png" alt="ASUS">
+            <?php
+            include_once("backend/includes/_db.php");
+            $query = "SELECT * FROM clients_img ORDER BY rand() LIMIT 8";
+            $res = mysqli_query($mysqli, $query);
+            $arreglo = [];
+            while ($fila = mysqli_fetch_array($res)) {
+                array_push($arreglo, $fila); ?>
+                <div class="happy-clients-wrap">
+                    <img src="backend/<?php echo $fila['clientimg_route']; ?>">
+                </div>
+            <?php
+        }
+        ?>
+
+            <div class="happy-clients-wrap dnone">
+                <img src="backend/<?php echo $fila['clientimg_route']; ?>">
             </div>
             <div class="happy-clients-wrap dnone">
-                <img src="img/logo-clients/sega_logo.png" alt="SEGA">
+                <img src="backend/<?php echo $fila['clientimg_route']; ?>">
             </div>
             <div class="happy-clients-wrap dnone">
-                <img src="img/logo-clients/3bar_logo.png" alt="3bar">
+                <img src="backend/<?php echo $fila['clientimg_route']; ?>">
             </div>
             <div class="happy-clients-wrap dnone">
-                <img src="img/logo-clients/amazon_logo.png" alt="Amazon">
-            </div>
-            <div class="happy-clients-wrap dnone">
-                <img src="img/logo-clients/abanlex.png" alt="Abanlex">
+                <img src="backend/<?php echo $fila['clientimg_route']; ?>">
             </div>
         </div>
         <a class="all-clients" id="allClients">See all clients</a>
     </div>
+
     <!-- MEET THE TEAM -->
     <div class="section-team">
-            <div class="container container-centered">
-              <h2 class="section-title-green">Meet the team</h2>
-              <!-- <hr class="line"> -->
-              <p class="section-description-green">Lorem ipsum dolor sit amet. Proin gravida nibh vel velit auctor aliquet.</p>
-              <div class="team-people">
+        <div class="container container-centered">
+            <h2 class="section-title-green">Meet the team</h2>
+            <!-- <hr class="line"> -->
+            <p class="section-description-green">Lorem ipsum dolor sit amet. Proin gravida nibh vel velit auctor aliquet.</p>
+            <div class="team-people">
                 <div class="team-people-wrap">
                     <img src="img/E1.png" alt="first">
                     <div class="vertical-line"></div>
@@ -381,23 +376,21 @@
             </div>
         </div>
     </section>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
     <script src="js/lightslider.js"></script>
     <script src="js/jquery-multitabs.js"></script>
     <script>
         $('.tab2').multitabs();
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#responsive').lightSlider({
                 item: 1,
                 loop: false,
                 slideMove: 1,
                 easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
                 speed: 600,
-                responsive: [
-                    {
+                responsive: [{
                         breakpoint: 800,
                         settings: {
                             item: 1,
@@ -415,15 +408,15 @@
                 ]
             });
         });
-        $('#submitForm').click(function(){
+        $('#submitForm').click(function() {
             let formName = $('#formName').val();
             let formEmail = $('#formEmail').val();
             let formMessage = $('#formMessage').val();
             let obj = {
-                "accion":"form_contact",
-                "form_name":formName,
-                "form_email":formEmail,
-                "form_message":formMessage
+                "accion": "form_contact",
+                "form_name": formName,
+                "form_email": formEmail,
+                "form_message": formMessage
             };
             $("#contactForm").find("input").each(function() {
                 $(this).removeClass("has-error");
@@ -434,7 +427,7 @@
                     return false;
                 }
             });
-            $.post("backend/includes/_funciones.php",obj,function(e){
+            $.post("backend/includes/_funciones.php", obj, function(e) {
                 if (e == 0) {
                     alert("Campos vacíos");
                 }

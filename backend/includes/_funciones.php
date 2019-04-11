@@ -307,7 +307,7 @@ function consultar_works()
 function consultar_work($id)
 {
 	global $mysqli;
-	$query = "SELECT * FROM works WHERE id = $id";
+	$query = "SELECT * FROM works WHERE works_id = $id";
 	$res = $mysqli->query($query);
 	$fila = mysqli_fetch_array($res);
 	echo json_encode($fila); //Imprime Json encodeado	
@@ -315,19 +315,25 @@ function consultar_work($id)
 function insertar_work()
 {  
 	global $mysqli;
-	$work_name = $_POST["work_name"];
-	$work_description = $_POST["work_description"];
-	$work_img = $_POST["work_img"];
-	if (empty($work_name) && empty($work_description) && empty($work_img)) {
+	$work_name = $_POST["titulo"];
+	$work_description = $_POST["descripcion"];
+	$work_tab1 = $_POST["tab1"];
+	$work_tab2 = $_POST["tab2"];
+	$work_tab3 = $_POST["tab3"];
+	if (empty($work_name) && empty($work_description) && empty($work_tab1) && empty($work_tab2) && empty($work_tab3)) {
 		echo "0";
 	} elseif (empty($work_name)) {
 		echo "0";
 	} elseif (empty($work_description)) {
 		echo "0";
-	} elseif (empty($work_img)) {
+	} elseif (empty($work_tab1)) {
+		echo "0";
+	} elseif (empty($work_tab2)) {
+		echo "0";
+	} elseif (empty($work_tab3)) {
 		echo "0";
 	} else {
-		$query = "INSERT INTO works VALUES ('','$work_name','$work_description','$work_img')";
+		$query = "INSERT INTO works VALUES ('','$work_name','$work_description','$work_tab1','$work_tab2','$work_tab3')";
 		$res = mysqli_query($mysqli, $query);
 		echo "1";
 	}
@@ -336,8 +342,8 @@ function editar_work()
 {
 	global $mysqli;
 	extract($_POST);
-	$query = "UPDATE works SET work_name = '$work_name', work_description = '$work_description', work_img = '$work_img'
-	WHERE id = '$id'";
+	$query = "UPDATE works SET works_title = '$titulo', works_description = '$descripcion', works_tab1 = '$tab1', works_tab2 = '$tab2', works_tab3 = '$tab3'
+	WHERE works_id = '$id'";
 	$res = $mysqli->query($query);
 	if ($res) {
 		echo "1";
@@ -348,7 +354,7 @@ function editar_work()
 function eliminar_work($id)
 {
 	global $mysqli;
-	$query = "DELETE FROM works WHERE id = $id";
+	$query = "DELETE FROM works WHERE works_id = $id";
 	$res = $mysqli->query($query);
 	if ($res) {
 		echo "1";
@@ -371,7 +377,7 @@ function consultar_testimonials()
 function consultar_testimonial($id)
 {
 	global $mysqli;
-	$query = "SELECT * FROM testimonials WHERE id = $id";
+	$query = "SELECT * FROM testimonials WHERE test_id = $id";
 	$res = $mysqli->query($query);
 	$fila = mysqli_fetch_array($res);
 	echo json_encode($fila); //Imprime Json encodeado	
@@ -381,7 +387,7 @@ function insertar_testimonial()
 	global $mysqli;
 	$description = $_POST["description"];
 	$quote = $_POST["quote"];
-	$img = $_POST["img"];
+	$img = $_POST["ruta"];
 	$name = $_POST["name"];
 	$puesto = $_POST["puesto"];
 	
@@ -407,8 +413,8 @@ function editar_testimonial()
 {
 	global $mysqli;
 	extract($_POST);
-	$query = "UPDATE testimonials SET description = '$description', quote = '$quote', img = '$img', name = '$name', puesto = '$puesto'
-	WHERE id = '$id'";
+	$query = "UPDATE testimonials SET description = '$description', test_quote = '$quote', test_img = '$img', test_name = '$name', test_puesto = '$puesto'
+	WHERE test_id = '$id'";
 	$res = $mysqli->query($query);
 	if ($res) {
 		echo "1";
@@ -419,7 +425,7 @@ function editar_testimonial()
 function eliminar_testimonial($id)
 {
 	global $mysqli;
-	$query = "DELETE FROM testimonials WHERE id = $id";
+	$query = "DELETE FROM testimonials WHERE test_id = $id";
 	$res = $mysqli->query($query);
 	if ($res) {
 		echo "1";
