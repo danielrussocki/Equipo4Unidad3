@@ -87,6 +87,20 @@
                             </span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="MTT.php">
+                            <span data-feather="file">
+                            Meet the team
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="WWD.php">
+                            <span data-feather="file">
+                            What we do
+                            </span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
