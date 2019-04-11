@@ -1,6 +1,9 @@
+<?php
+require_once("backend/includes/_db.php");
+global $mysqli;
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,11 +39,21 @@
                 </div>
             </nav>
     </header>
-    <main id="home" class="principal">
-        <h1 class="h1-main">Art is eternal happiness</h1>
-        <button class="mybtn">Work with us</button>
+    <?php
+    $consulta_main_principal = "SELECT * FROM header LIMIT 1";
+    $resp_consulta_main = $mysqli->query($consulta_main_principal);
+    while($fila_consulta_main = mysqli_fetch_array($resp_consulta_main)){
+    ?>
+    <main id="home" class="principal" style="background:url('<?php echo $fila_consulta_main['header_background'];?>') no repeat;">
+        <!-- <h1 class="h1-main">Art is eternal happiness</h1> -->
+        <h1 class="h1-main"><?php echo $fila_consulta_main['header_title'];?></h1>
+        <!-- <button class="mybtn">Work with us</button> -->
+        <button class="mybtn" role="link" onclick="window.location='<?php echo $fila_consulta_main['header_href'];?>'"><?php echo $fila_consulta_main['header_button'];?></button>
         <button class="scroll-down">Scroll Down<i class="fas fa-arrow-down"></i></button>
     </main>
+    <?php   
+        }
+    ?>
     <!-- WHAT WE DO -->
     <section class="whatwedo" id="whatwedo">
             <div class="section-what-we-do">
@@ -307,15 +320,16 @@
           </div>
     <!--------------------->
     <section class="footer-1" id="contactUs">
+        <?php
+        $consulta_about_us = "SELECT * FROM aboutUs WHERE footer_status = 1 LIMIT 1";
+        $respuesta_about_us = $mysqli->query($consulta_about_us);
+        while($fila_about_us = mysqli_fetch_array($respuesta_about_us)){
+        ?>
         <div class="sect">
             <h2 class="h2-sect">About us</h2>
             <div class="footer-section">
                 <div class="contenido">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa maxime sequi quo saepe harum
-                        quidem. Similique numquam saepe optio, quasi perspiciatis dicta repudiandae pariatur soluta
-                        deleniti illum nisi, dolorem aliquam. Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                        Veritatis aliquam tempora at itaque qui repellendus, quidem accusamus? Expedita itaque
-                        accusamus, totam asperiores numquam doloribus a, dignissimos quo similique eius et?</p>
+                    <p><?php echo $fila_about_us['footer_content'];?></p>
                 </div>
                 <ul class="social-media">
                     <li><a href="#"><img src="img/ball.png" alt="ball"></a></li>
@@ -324,17 +338,46 @@
                 </ul>
             </div>
         </div>
+        <?php
+            }
+        ?>
         <div class="sect">
             <h2 class="h2-sect">Recent posts</h2>
             <div class="footer-section">
                 <div class="contenido">
                     <ul class="posts">
+                        <?php
+                        $consulta_recent_posts = "SELECT * FROM recentPosts";
+                        $respuesta_recent_posts = $mysqli->query($consulta_recent_posts);
+                        $color_class = "verde";
+                        while($fila_recent_posts = mysqli_fetch_array($respuesta_recent_posts)){
+                            switch($fila_recent_posts['post_category']){
+                                case 'PHOTOGRAPHY':
+                                $color_class = "azul";
+                                break;
+                                case 'BOOK':
+                                $color_class = "naranja";
+                                break;
+                                case 'UI DESIGN':
+                                $color_class = "amarillo";
+                                break;
+                                case 'MAGAZINE':
+                                $color_class = "verde";
+                                break;
+                                default:
+                                $color_class = "verde";
+                                break;
+                            }
+                        ?>
                         <li>
-                            <img src="img/post1.png" alt="post1">
-                            <p>Lorem ipsum dolor sit amet.</p>
-                            <span class="bg-verde">Magazine</span>
+                            <img src="<?php echo $fila_recent_posts['post_file'];?>" alt="<?php echo $fila_recent_posts['post_text'];?>">
+                            <p><?php echo $fila_recent_posts['post_text'];?></p>
+                            <span class="bg-<?php echo $color_class; ?>"><?php echo $fila_recent_posts['post_category'];?></span>
                         </li>
-                        <li>
+                        <?php
+                            }
+                        ?>
+                        <!-- <li>
                             <img src="img/post2.png" alt="post2">
                             <p>Lorem ipsum dolor sit amet.</p>
                             <span class="bg-amarillo">Ui design</span>
@@ -353,20 +396,30 @@
                             <img src="img/post5.png" alt="post5">
                             <p>Lorem ipsum dolor sit amet.</p>
                             <span class="bg-amarillo">Ui design</span>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
         </div>
+        <?php
+        $consulta_contact_us = "SELECT * FROM contactUs LIMIT 1";
+        $respuesta_contact_us = $mysqli->query($consulta_contact_us);
+        while($fila_contact_us=mysqli_fetch_array($respuesta_contact_us)){
+        ?>
         <div class="sect">
             <h2 class="h2-sect">Contact us</h2>
             <div class="footer-section">
                 <div class="contact-section">
-                    <p>10044 West 23th street, suite 721</p>
+                    <!-- <p>10044 West 23th street, suite 721</p>
                     <p>New york NY 10010</p>
                     <p>Email: Username@email.com</p>
                     <p>Phone: +1 (0) 123 4567 890</p>
-                    <p>Fax: +1 (0) 321 4567 890</p>
+                    <p>Fax: +1 (0) 321 4567 890</p> -->
+                    <p><?php echo $fila_contact_us['contact_address'];?></p>
+                    <p><?php echo $fila_contact_us['contact_location'];?></p>
+                    <p>Email: <?php echo $fila_contact_us['contact_email'];?></p>
+                    <p>Phone: <?php echo $fila_contact_us['contact_phone'];?></p>
+                    <p>Fax: <?php echo $fila_contact_us['contact_fax'];?></p>
                     <form class="contact-form" if="contactForm">
                         <input type="text" placeholder="Your name..." id="formName">
                         <input type="email" placeholder="Your email..." id="formEmail">
@@ -376,6 +429,9 @@
                 </div>
             </div>
         </div>
+        <?php
+        }
+        ?>
     </section>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
